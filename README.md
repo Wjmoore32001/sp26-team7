@@ -7,8 +7,8 @@
 
 ## Description
     Gym Class Hub is a web app for a local gym that has multiple studio rooms.
-    Instead of the gym running every class, members can create and host their own classes (yoga, strenth, HIIT, etc).
-    Gym members can browse classes reserve a spot, and leave reviews after attending.
+    Instead of the gym running every class, members/fitness instuctors can create and host their own classes (yoga, strenth, HIIT, etc), view RSVPs, and reply to reviews. 
+    Gym members can browse classes, reserve a spot, and leave reviews after attending.
     The main goal is to make scheduling and hosting gym classes easy while managing time and room availability.
 
 ## App Functions
@@ -20,4 +20,7 @@
         Leave reviews on both classes and provider profiles.
 
     2. Provider
-        //
+        i.   Create a provider account - register as a fitness instructor
+        ii.  Create services - post classes
+        iii. View how many customers have RSVP'd to the classes
+        iv.  Reply to reviews
