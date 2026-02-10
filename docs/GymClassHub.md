@@ -1,25 +1,27 @@
 
-# Requirements – Starter Template
+# Requirements
 
-**Project Name:** Your App Name \
-**Team:** Names and roles \
-**Course:** CSC 340\
+**Project Name:** Gym Class Hub \
+**Team:** William Moore - Customer; Chloe Rhodes - Provider \
+**Course:** CSC 340-01\
 **Version:** 1.0\
 **Date:** 2026-01-30
 
 ---
 
 ## 1. Overview
-**Vision.** One or two sentences: who this is for, the core problem, and the outcome.
+**Vision.** Gym Class Hub is a web app for a local gym that has multiple studio rooms.
+Instead of the gym running every class, members/fitness instuctors can create and host their own classes (yoga, strenth, HIIT, etc), view RSVPs, and reply to reviews.
+Gym members can browse classes, reserve a spot, and leave reviews after attending.
+The main goal is to make scheduling and hosting gym classes easy while managing time and room availability.
 
 **Glossary** Terms used in the project
 - **Term 1:** description.
 - **Term 2:** description
 
 **Primary Users / Roles.**
-- **Customer (e.g., Student/Patient/Pet Owner/etc. )** — 1 line goal statement.
-- **Provider (e.g., Teacher/Doctor/Pet Sitter/etc. )** — 1 line goal statement.
-- **SysAdmin (optional)** — 1 line goal statement.
+- **Customer (Takes Gym Classes)** — Gym members who want to browse, reserve, and review fitness classes offered by instructors.
+- **Instructor (Offers Gym Classes)** — Fitness instructors who create and manage classes, track RSVPs, and engage with customers through reviews.
 
 **Scope (this semester).**
 - <capability 1>
