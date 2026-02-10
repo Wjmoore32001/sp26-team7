@@ -16,21 +16,25 @@ Gym members can browse classes, reserve a spot, and leave reviews after attendin
 The main goal is to make scheduling and hosting gym classes easy while managing time and room availability.
 
 **Glossary** Terms used in the project
-- **Term 1:** description.
-- **Term 2:** description
+- **Enrolled:** Customer who has reserved their spot in a gym class.
+- **Capacity:** Max number of spots available for a given class.
+- **Waitlist:** A queue of customers requesting enrollment in a class that is already at max capacity.
+- **Class Session:** An instance of a scheduled class that has a date, time, room, student list, and instructor.
 
 **Primary Users / Roles.**
-- **Customer (Takes Gym Classes)** — Gym members who want to browse, reserve, and review fitness classes offered by instructors.
+- **Student(Takes Gym Classes)** — Gym members who want to browse, reserve, and review fitness classes offered by instructors.
 - **Instructor (Offers Gym Classes)** — Fitness instructors who create and manage classes, track RSVPs, and engage with customers through reviews.
 
 **Scope (this semester).**
-- <capability 1>
-- <capability 2>
-- <capability 3>
+- Create and manage Student and Instructor accounts.
+- Browse classes via search and/or filtering.
+- Scheduling of classes sessions with respect to gym room available affected by other classes.
+- Reviews; Leaving reviews for students and replying to reviews for Instructors.
 
 **Out of scope (deferred).**
-- <deferred 1>
-- <deferred 2>
+- Verifying Instructors a proper fitness professionals, qualified to teach classes.
+- Completing online payments and refunding.
+- Gym equipment allocation/availability between classes.
 
 > This document is **requirements‑level** and solution‑neutral; design decisions (UI layouts, API endpoints, schemas) are documented separately.
 
@@ -39,25 +43,35 @@ The main goal is to make scheduling and hosting gym classes easy while managing 
 ## 2. Functional Requirements (User Stories)
 Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`.** Each story includes at least one **Given/When/Then** scenario.
 
-### 2.1 Customer Stories
-- **US‑CUST‑001 — <short title>**  
-  _Story:_ As a customer, I want … so that …  
+### 2.1 Student Stories
+- **US‑CUST‑001 — Register & manage profile**  
+  _Story:_ As a student, I want to create and manage my profile information (username, email, and password) so that  I can keep my profile information up to date or if I put info in incorrectly during sign up.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Register an Account
+    Given I don't have an account
+    When  I sign up with valid credentials
+    Then  I have a Student profile that I can also update
   ```
 
-- **US‑CUST‑002 — <short title>**  
-  _Story:_ As a customer, I want … so that …  
+- **US‑CUST‑002 — Browse and Attend Classes**  
+  _Story:_ As a student, I want browse available classes so that I can find a class to reserve a spot in it.  
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Find and Attend gym class
+    Given there is a class available with a spot available or a waitlist
+    When  I find the class via some search tye
+    Then  I can reserve a spot or enter waitlist, and later attend a class
+  ```
+
+- **US‑CUST‑003 — Blank**
+- _Story:_ Blank  
+  _Acceptance:_
+  ```gherkin
+  Scenario: Blank 
+    Given blank
+    When  blank
+    Then blank
   ```
 
 ### 2.2 Provider Stories
