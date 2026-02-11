@@ -22,14 +22,14 @@ The main goal is to make scheduling and hosting gym classes easy while managing 
 - **Class Session:** An instance of a scheduled class that has a date, time, room, student list, and instructor.
 
 **Primary Users / Roles.**
-- **Student(Takes Gym Classes)** — Gym members who want to browse, reserve, and review fitness classes offered by instructors.
+- **Customer(Takes Gym Classes)** — Gym members who want to browse, reserve, and review fitness classes offered by instructors.
 - **Instructor (Offers Gym Classes)** — Fitness instructors who create and manage classes, track RSVPs, and engage with customers through reviews.
 
 **Scope (this semester).**
-- Create and manage Student and Instructor accounts.
+- Create and manage Customer and Instructor accounts.
 - Browse classes via search and/or filtering.
 - Scheduling of classes sessions with respect to gym room available affected by other classes.
-- Reviews; Leaving reviews for students and replying to reviews for Instructors.
+- Reviews; Leaving reviews for customer and replying to reviews for Instructors.
 
 **Out of scope (deferred).**
 - Verifying Instructors a proper fitness professionals, qualified to teach classes.
@@ -45,17 +45,17 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
 
 ### 2.1 Student Stories
 - **US‑CUST‑001 — Register & manage profile**  
-  _Story:_ As a student, I want to create and manage my profile information (username, email, and password) so that  I can keep my profile information up to date or if I put info in incorrectly during sign up.
+  _Story:_ As a customer, I want to create and manage my profile information (username, email, and password) so that  I can keep my profile information up to date or if I put info in incorrectly during sign up.
   _Acceptance:_
   ```gherkin
   Scenario: Register an Account
     Given I don't have an account
     When  I sign up with valid credentials
-    Then  I have a Student profile that I can also update
+    Then  I have a customer profile that I can also update
   ```
 
 - **US‑CUST‑002 — Browse and Attend Classes**  
-  _Story:_ As a student, I want browse available classes so that I can find a class to reserve a spot in it.  
+  _Story:_ As a customer, I want browse available classes so that I can find a class to reserve a spot in it.  
   _Acceptance:_
   ```gherkin
   Scenario: Find and Attend gym class
