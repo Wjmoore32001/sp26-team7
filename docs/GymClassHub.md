@@ -64,14 +64,14 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     Then  I can reserve a spot or enter waitlist, and later attend a class
   ```
 
-- **US‑CUST‑003 — Blank**
-- _Story:_ Blank  
+- **US‑CUST‑003 — Leave Reviews on Classes**
+- _Story:_ As a customer, I want to leave reviews on classes I have attended, so that I can aid the community in knowing about a class from experience.
   _Acceptance:_
   ```gherkin
-  Scenario: Blank 
-    Given blank
-    When  blank
-    Then blank
+  Scenario: Leave a review
+    Given I have enrolled in a class and then later taken that class
+    When  Leave a review on a class I have taken
+    Then It is added to the review section of that class
   ```
 
 ### 2.2 Provider Stories
