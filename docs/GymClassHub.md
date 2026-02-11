@@ -1,34 +1,41 @@
 
-# Requirements – Starter Template
+# Requirements
 
-**Project Name:** Your App Name \
-**Team:** Names and roles \
-**Course:** CSC 340\
+**Project Name:** Gym Class Hub \
+**Team:** William Moore - Customer; Chloe Rhodes - Instructor \
+**Course:** CSC 340-01\
 **Version:** 1.0\
 **Date:** 2026-01-30
 
 ---
 
 ## 1. Overview
-**Vision.** One or two sentences: who this is for, the core problem, and the outcome.
+**Vision.** Gym Class Hub is a web app for a local gym that has multiple studio rooms.
+Instead of the gym running every class, members/fitness instructors can create and host their own classes (yoga, strength, HIIT, etc), view enrollments, and reply to reviews.
+Gym members can browse classes, reserve a spot, and leave reviews after attending.
+The main goal is to make scheduling and hosting gym classes easy while managing time and room availability.
 
 **Glossary** Terms used in the project
-- **Term 1:** description.
-- **Term 2:** description
+- **Enrolled:** Customer who has reserved their spot in a gym class.
+- **Capacity:** Max number of spots available for a given class.
+- **Waitlist:** A queue of customers requesting enrollment in a class that is already at max capacity.
+- **Class Session:** An instance of a scheduled class that has a date, time, room, student list, and instructor.
+- **Student:** Can refer to a customer. In the case of an Instructor viewing the people attending their class, they will be presented as students.
 
 **Primary Users / Roles.**
-- **Customer (e.g., Student/Patient/Pet Owner/etc. )** — 1 line goal statement.
-- **Provider (e.g., Teacher/Doctor/Pet Sitter/etc. )** — 1 line goal statement.
-- **SysAdmin (optional)** — 1 line goal statement.
+- **Customer(Takes Gym Classes)** — Gym members who want to browse, reserve, and review fitness classes offered by instructors.
+- **Instructor (Offers Gym Classes)** — Fitness instructors who create and manage classes, view enrollments, and engage with customers through reviews.
 
 **Scope (this semester).**
-- <capability 1>
-- <capability 2>
-- <capability 3>
+- Create and manage Customer and Instructor accounts.
+- Browse classes via search and/or filtering.
+- Scheduling of classes sessions with respect to gym room available affected by other classes.
+- Reviews; Leaving reviews for customer and replying to reviews for Instructors.
 
 **Out of scope (deferred).**
-- <deferred 1>
-- <deferred 2>
+- Verifying Instructors a proper fitness professionals, qualified to teach classes.
+- Completing online payments and refunding.
+- Gym equipment allocation/availability between classes.
 
 > This document is **requirements‑level** and solution‑neutral; design decisions (UI layouts, API endpoints, schemas) are documented separately.
 
@@ -38,24 +45,54 @@
 Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`.** Each story includes at least one **Given/When/Then** scenario.
 
 ### 2.1 Customer Stories
-- **US‑CUST‑001 — <short title>**  
-  _Story:_ As a customer, I want … so that …  
+- **US-CUST-001 — Register Account**
+  _Story_: As a customer, I want to create an account using my username, email, and password so that I can access the system and enroll in classes.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Successful account registration
+    Given I am on the registration page
+    When I enter a valid username, email, and password
+    Then my account is created and I can access the system
   ```
-
-- **US‑CUST‑002 — <short title>**  
-  _Story:_ As a customer, I want … so that …  
+  
+- **US-CUST-002 — Manage Profile**
+  _Story_: As a customer, I want to edit my profile information so that I can keep my account details up to date.
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Update profile information
+    Given I have a customer account
+    When I update my profile information, like email or password
+    Then my updated information is saved to my account
+  ```
+  
+- **US‑CUST‑003 — Search/Filter Classes**  
+  _Story:_ As a customer, I want to search and filter classes by type and time so that I can find a class that fits my schedule.
+  _Acceptance:_
+  ```gherkin
+  Scenario: Search classes by search and/or filter
+    Given there are multiple upcoming classes
+    When  I search a class name or filter by class type
+    Then  I only see classes matching my search criteria
+  ```
+  
+  - **US‑CUST‑004 — Join Waitlist**  
+    _Story:_ As a customer, I want to join a waitlist when a class is full so that I still have a chance to attend.
+    _Acceptance:_
+  ```gherkin
+  Scenario: Join waitlist for a full class
+    Given a class is at max capacity
+    When  I attempt to reserve a spot
+    Then  I am given the option to join the waitlist
+  ```
+  
+- **US‑CUST‑005 — Leave Reviews on Classes**
+- _Story:_ As a customer, I want to leave reviews on classes I have attended, so that I can aid the community in knowing about a class from experience.
+  _Acceptance:_
+  ```gherkin
+  Scenario: Leave a review
+    Given I have enrolled in a class and then later taken that class
+    When  I leave a review on a class I have taken
+    Then it is added to the review section of that class
   ```
 
 ### 2.2 Provider Stories
