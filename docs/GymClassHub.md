@@ -3,7 +3,7 @@
 
 **Project Name:** Gym Class Hub \
 **Team:** William Moore - Customer; Chloe Rhodes - Instructor \
-**Course:** CSC 340-01\
+**Course:** CSC 340-02\
 **Version:** 1.0\
 **Date:** 2026-01-30
 
@@ -95,60 +95,70 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     Then it is added to the review section of that class
   ```
 
-### 2.2 Provider Stories
-- **US‑PROV‑001 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+### 2.2 Provider(instructor) Stories
+- **US‑INST‑001 — Register instructor account**  
+  _Story:_ As a instructor, I want to create a instructor account using my username, email, and password so that I can create classes for others to enroll in.  
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Successful instructor account registration
+    Given I am on the registration page
+    When  I enter a valid username, email, and password
+    Then  my instructor account is created and I can create classes
+  ```
+  - **US‑INST‑002 — update instructor profile**  
+  _Story:_ As a instructor, I want to update my profile so that my profile is up to date with any changes I may make.  
+  _Acceptance:_
+  ```gherkin
+  Scenario: Update instructor profile
+    Given I am a verified instructor
+    When  I update my profile information
+    Then  my updated information is saved to my account
   ```
 
-- **US‑PROV‑002 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑INST‑003 — Create a class**  
+  _Story:_ As a instructor, I want to create classes so that customers can take my classes. 
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: created a new class
+    Given I am a instructor
+    When  I create a new gym class
+    Then  my class appears on the list of available classes
   ```
 
-### 2.3 SysAdmin Stories
-- **US‑ADMIN‑001 — <short title>**  
-  _Story:_ As a sysadmin, I want … so that …  
+- **US‑INST‑004 — View enrollments**  
+  _Story:_ As a instructor, I want to view customers enrolled so that I can manage my waitlist and see my stats.  
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: view enrollments
+    Given my class is listed
+    When  I view enrollments/waitlist
+    Then  I see how many customers enrolled and waitlisted
   ```
 
-- **US‑ADMIN‑002 — <short title>**  
-  _Story:_ As a sysadmin, I want … so that …  
+-- **US‑INST‑005 — Reply to customer reviews**  
+  _Story:_ As a instructor, I want to reply to reviews so that customers know I value their input. 
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: reply to reviews
+    Given my class is over and I have customer reviews
+    When  I reply to a review
+    Then  the reply is under the review
   ```
 
 ---
 
 ## 3. Non‑Functional Requirements (make them measurable)
-- **Performance:** description 
-- **Availability/Reliability:** description
-- **Security/Privacy:** description
-- **Usability:** description
+- **Performance:** 95% of class search and browse requests respond in ≤ 1.5s under typical load. 
+- **Availability/Reliability:** ≥ 99% monthly uptime (excluding maintenance); reliably stores class information.
+- **Security/Privacy:** Password-protected accounts; role based access for instructors and customers.
+- **Usability:** New users complete class browsing and RSVP in ≤ 5 minutes.
 
 ---
 
 ## 4. Assumptions, Constraints, and Policies
-- list any rules, policies, assumptions, etc.
+- Users have internet access and use a modern browser.
+- Development is limited by course requirements and timeline.
+- Instructors manage their own classes; user content must follow basic guidelines.
 
 ---
 
