@@ -1,0 +1,62 @@
+
+:root[data-bs-theme="dark"] {
+  /* Base page surfaces */
+  --bs-body-bg: #0f141b;           /* deep slate */
+  --bs-body-bg-rgb: 15, 20, 27;
+  --bs-body-color: #e7edf6;        /* soft near-white */
+  --bs-body-color-rgb: 231, 237, 246;
+
+  --bs-emphasis-color: #f2f6ff;
+  --bs-secondary-color: rgba(231, 237, 246, 0.70);
+  --bs-tertiary-color: rgba(231, 237, 246, 0.55);
+
+  /* Cards / panels */
+  --bs-card-bg: #141b24;
+  --bs-border-color: rgba(231, 237, 246, 0.14);
+
+  /* Links */
+  --bs-link-color: #66a3ff;
+  --bs-link-hover-color: #8bb8ff;
+
+  /* PRIMARY (accent blue) */
+  --bs-primary: #4c8dff;
+  --bs-primary-rgb: 76, 141, 255;
+  --bs-primary-text-emphasis: #bcd6ff;
+  --bs-primary-bg-subtle: rgba(76, 141, 255, 0.16);
+  --bs-primary-border-subtle: rgba(76, 141, 255, 0.35);
+
+  /* SECONDARY (cool gray) */
+  --bs-secondary: #8ea0b7;
+  --bs-secondary-rgb: 142, 160, 183;
+  --bs-secondary-text-emphasis: #d2dbe7;
+  --bs-secondary-bg-subtle: rgba(142, 160, 183, 0.14);
+  --bs-secondary-border-subtle: rgba(142, 160, 183, 0.28);
+
+  /* SUCCESS (mint/green for confirmations) */
+  --bs-success: #2fd08f;
+  --bs-success-rgb: 47, 208, 143;
+  --bs-success-text-emphasis: #b8f3dc;
+  --bs-success-bg-subtle: rgba(47, 208, 143, 0.14);
+  --bs-success-border-subtle: rgba(47, 208, 143, 0.28);
+
+  /* INFO (cyan for hints) */
+  --bs-info: #2fc1e6;
+  --bs-info-rgb: 47, 193, 230;
+  --bs-info-text-emphasis: #b7eefb;
+  --bs-info-bg-subtle: rgba(47, 193, 230, 0.14);
+  --bs-info-border-subtle: rgba(47, 193, 230, 0.28);
+
+  /* WARNING (warm amber) */
+  --bs-warning: #f5b84b;
+  --bs-warning-rgb: 245, 184, 75;
+  --bs-warning-text-emphasis: #ffe3b0;
+  --bs-warning-bg-subtle: rgba(245, 184, 75, 0.14);
+  --bs-warning-border-subtle: rgba(245, 184, 75, 0.28);
+
+  /* DANGER (red for destructive actions) */
+  --bs-danger: #ff5a72;
+  --bs-danger-rgb: 255, 90, 114;
+  --bs-danger-text-emphasis: #ffc2cc;
+  --bs-danger-bg-subtle: rgba(255, 90, 114, 0.14);
+  --bs-danger-border-subtle: rgba(255, 90, 114, 0.28);
+}
