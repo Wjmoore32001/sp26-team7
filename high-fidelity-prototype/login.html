@@ -3,13 +3,70 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Browse</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="/high-fidelity-prototype/assets/css/theme.css" rel="stylesheet">
 </head>
 <body>
-    <div id="nav-placeholder"></div>
-    <script src="/high-fidelity-prototype/assets/js/include-nav.js" data-nav="root"></script>
-    <main>This is where you can start. The script under this can be last and what's above puts the correct navbar in place. You can delete this main tag as well</main>
+<div id="nav-placeholder"></div>
+<script src="/high-fidelity-prototype/assets/js/include-nav.js" data-nav="root"></script>
+
+<div class="container text-center">
+    <div class="row mt-3">
+        <div class="col p-1 bg-body-tertiary border border-primary-subtle rounded-3">
+            <h1 class="text-light">Login</h1>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <div class="p-3 bg-body-tertiary border border-primary-subtle rounded-3">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-start">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label text-body-secondary">Email</label>
+                                <input id="email" type="email" class="form-control bg-body-tertiary border-secondary-subtle" placeholder="name@example.com">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label text-body-secondary">Password</label>
+                                <input id="password" type="password" class="form-control bg-body-tertiary border-secondary-subtle" placeholder="••••••••">
+                            </div>
+
+                            <div class="row align-items-center mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-body-secondary" for="rememberMe">
+                                            Remember me
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                                    <a class="link-primary" href="/high-fidelity-prototype/forgot-password.html">Forgot password?</a>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Sign In</button>
+                                <a class="btn btn-outline-primary" href="/high-fidelity-prototype/customer/dashboard.html">Create Account</a>
+                            </div>
+
+                            <div class="mt-3 small text-body-secondary text-center">
+                                Demo shortcuts:
+                                <a class="link-primary text-decoration-none mx-1" href="/high-fidelity-prototype/customer/dashboard.html">Customer</a>
+                                <a class="link-primary text-decoration-none" href="/high-fidelity-prototype/instructor/dashboard.html">Instructor</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
