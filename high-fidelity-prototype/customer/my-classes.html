@@ -4,12 +4,174 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Classes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="/high-fidelity-prototype/assets/css/theme.css" rel="stylesheet">
 </head>
+
 <body>
-    <div id="nav-placeholder"></div>
-    <script src="/high-fidelity-prototype/assets/js/include-nav.js" data-nav="customer"></script>
-    <main>This is where you can start. The script under this can be last and what's above puts the correct navbar in place. You can delete this main tag as well</main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<div id="nav-placeholder"></div>
+<script src="/high-fidelity-prototype/assets/js/include-nav.js" data-nav="customer"></script>
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col p-3 bg-body-tertiary border border-primary-subtle rounded-3">
+            <div class="row">
+                <div class="col">
+                    <h1 class="h3 mb-1">My Classes</h1>
+                    <div class="text-body-secondary">All scheduled sessions and your class history.</div>
+                </div>
+                <div class="col text-end">
+                    <a class="btn btn-primary" href="/high-fidelity-prototype/customer/browse.html">Browse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col p-3 bg-body-tertiary border border-primary-subtle rounded-3">
+            <div class="row mb-2">
+                <div class="col">
+                    <h2 class="h5 mb-0">Scheduled / Upcoming</h2>
+                </div>
+            </div>
+
+            <div class="row align-items-center border border-secondary-subtle rounded-3 p-2 mb-3">
+                <div class="col-md-3">
+                    <a href="/high-fidelity-prototype/customer/class-details.html">
+                        <img src="/high-fidelity-prototype/assets/images/placeholder-class-1.jpg" alt="Class"
+                             class="img-fluid rounded-3 border border-secondary-subtle">
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <a class="text-decoration-none" href="/high-fidelity-prototype/customer/class-details.html">
+                        <h5 class="mb-1">HIIT Burn</h5>
+                    </a>
+                    <div class="small text-body-secondary mb-2">Instructor: Jordan Lee</div>
+                    <div class="row small">
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Time:</span> Mon 10:00 AM</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span> Studio A</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Price:</span> $25</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span> HIIT</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span> High</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-md-end">
+                    <button type="button" class="btn btn-primary">Cancel</button>
+                </div>
+            </div>
+
+            <div class="row align-items-center border border-secondary-subtle rounded-3 p-2 mb-3">
+                <div class="col-md-3">
+                    <a href="/high-fidelity-prototype/customer/class-details.html">
+                        <img src="/high-fidelity-prototype/assets/images/placeholder-class-2.jpg" alt="Class"
+                             class="img-fluid rounded-3 border border-secondary-subtle">
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <a class="text-decoration-none" href="/high-fidelity-prototype/customer/class-details.html">
+                        <h5 class="mb-1">Spin Sprint</h5>
+                    </a>
+                    <div class="small text-body-secondary mb-2">Instructor: Maya Chen</div>
+                    <div class="row small">
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Time:</span> Wed 6:00 PM</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span> Cycle Room</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Price:</span> $20</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span> Cycling/Spin</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span> Intense</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-md-end">
+                    <button type="button" class="btn btn-primary">Cancel</button>
+                </div>
+            </div>
+
+            <div class="row align-items-center border border-secondary-subtle rounded-3 p-2">
+                <div class="col-md-3">
+                    <a href="/high-fidelity-prototype/customer/class-details.html">
+                        <img src="/high-fidelity-prototype/assets/images/placeholder-class-3.jpg" alt="Class"
+                             class="img-fluid rounded-3 border border-secondary-subtle">
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <a class="text-decoration-none" href="/high-fidelity-prototype/customer/class-details.html">
+                        <h5 class="mb-1">Strength Foundations</h5>
+                    </a>
+                    <div class="small text-body-secondary mb-2">Instructor: Alex Rivera</div>
+                    <div class="row small">
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Time:</span> Fri 5:00 PM</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span> Studio B</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Price:</span> $15</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span> Strength</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span> Medium</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-md-end">
+                    <button type="button" class="btn btn-primary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-4">
+        <div class="col p-3 bg-body-tertiary border border-primary-subtle rounded-3">
+            <div class="row mb-2">
+                <div class="col">
+                    <h2 class="h5 mb-0">Previously Taken</h2>
+                </div>
+            </div>
+
+            <div class="row align-items-center border border-secondary-subtle rounded-3 p-2 mb-3">
+                <div class="col-md-3">
+                    <a href="/high-fidelity-prototype/customer/class-details.html">
+                        <img src="/high-fidelity-prototype/assets/images/placeholder-class-1.jpg" alt="Class"
+                             class="img-fluid rounded-3 border border-secondary-subtle">
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <a class="text-decoration-none" href="/high-fidelity-prototype/customer/class-details.html">
+                        <h5 class="mb-1">Yoga Flow</h5>
+                    </a>
+                    <div class="small text-body-secondary mb-2">Instructor: Nina Park</div>
+                    <div class="row small">
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Taken:</span> Jan 22</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span> Yoga</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span> Low</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-md-end">
+                    <a class="btn btn-primary" href="/high-fidelity-prototype/customer/leave-review.html">Leave Review</a>
+                </div>
+            </div>
+
+            <div class="row align-items-center border border-secondary-subtle rounded-3 p-2">
+                <div class="col-md-3">
+                    <a href="/high-fidelity-prototype/customer/class-details.html">
+                        <img src="/high-fidelity-prototype/assets/images/placeholder-class-3.jpg" alt="Class"
+                             class="img-fluid rounded-3 border border-secondary-subtle">
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <a class="text-decoration-none" href="/high-fidelity-prototype/customer/class-details.html">
+                        <h5 class="mb-1">Core Crusher</h5>
+                    </a>
+                    <div class="small text-body-secondary mb-2">Instructor: Jordan Lee</div>
+                    <div class="row small">
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Taken:</span> Feb 2</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span> HIIT</div>
+                        <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span> High</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-md-end">
+                    <a class="btn btn-primary" href="/high-fidelity-prototype/customer/leave-review.html">Leave Review</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></script>
 </body>
 </html>
