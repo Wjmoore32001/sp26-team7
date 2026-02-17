@@ -1,17 +1,123 @@
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Class Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
     <script src="/high-fidelity-prototype/assets/js/include-nav.js" data-nav="instructor"></script>
 
-    <main>This is where you can put all your html. The script under this can be last and what's above puts the correct navbar in place. You can delete this main tag as well</main>
+    <div class="container text-center">
+        <div class="row mt-3">
+            <div class="col p-1 bg-body-tertiary border border-primary-subtle rounded-3">
+                <h1>Class Details</h1>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-start">
+                <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+                    <div class="row g-3 p-2 border border-secondary-subtle rounded-3 mb-3">
+                        <div>
+                            <img src="/high-fidelity-prototype/assets/images/placeholder-class-banner.jpg"
+                                alt="Class Banner Placeholder"
+                                class="img-fluid rounded-3 border border-secondary-subtle">
+                        </div>
+                        <div class="col-lg-8">
+                            <h3 class="mb-1">HIIT</h3>
+                            <div class="text-body-secondary mb-2">A training method that alternates between short bursts
+                                of intense, maximum-effort exercise and brief, low-intensity recovery periods</div>
+                            <div class="row small mb-2">
+                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span> HIIT</div>
+                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Time:</span> 10:00 AM
+                                </div>
+                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Price:</span> $25</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span> High
+                                </div>
+                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span> Studio A
+                                </div>
+                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Spots:</span> 6 / 15</div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary w-100">Join</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-outline-primary w-100">Join Waitlist</button>
+                                </div>
+                                <div class="row g-2 mt-2">
+                                    <div class="col-md-12">
+                                        <a href="/high-fidelity-prototype/instructor/class-roster.html"
+                                            class="btn btn-outline-secondary w-100">
+                                            View Class Roster
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="p-2 border border-secondary-subtle rounded-3 h-100 text-center">
+                                <img src="/high-fidelity-prototype/assets/images/placeholder-instructor.jpg"
+                                    alt="Instructor Image Placeholder"
+                                    class="img-fluid rounded-3 border border-secondary-subtle mb-2">
+                                <div class="fw-semibold">Jordan Lee</div>
+                                <div class="small text-body-secondary">Instructor</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-3 p-2 border border-secondary-subtle rounded-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">Reviews</h4>
+                            <a class="btn btn-outline-primary"
+                                href="/high-fidelity-prototype/customer/leave-review.html">Leave a Review</a>
+                        </div>
+                        <div class="col">
+                            <div class="p-2 border border-secondary-subtle rounded-3 mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-semibold">Sam W.</div>
+                                    <div class="small text-body-secondary">5/5</div>
+                                </div>
+                                <div class="small text-body-secondary mb-1">Took this class on 2/16/2026</div>
+                                <div>Great pacing and really motivating. Felt like a solid workout without being
+                                    overwhelming.</div>
+                            </div>
+                            <div class="p-2 border border-secondary-subtle rounded-3 mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-semibold">Alyssa R.</div>
+                                    <div class="small text-body-secondary">4/5</div>
+                                </div>
+                                <div class="small text-body-secondary mb-1">Took this class on 2/15/2026</div>
+                                <div>Awesome energy and good variety. I’d love a slightly longer cool-down at the end.
+                                </div>
+                            </div>
+                            <div class="p-2 border border-secondary-subtle rounded-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-semibold">Chris M.</div>
+                                    <div class="small text-body-secondary">5/5</div>
+                                </div>
+                                <div class="small text-body-secondary mb-1">Took this class on 2/14/2026</div>
+                                <div>Instructor was super clear and the intervals were fun. Definitely signing up again.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
