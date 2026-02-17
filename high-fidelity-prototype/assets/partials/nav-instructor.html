@@ -1,46 +1,80 @@
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+
 <body>
-<nav class="navbar navbar-expand">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/high-fidelity-prototype/home.html">NavBar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/high-fidelity-prototype/home.html">Home</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="navbar-item">
-                    <a class="nav-link active" href="/high-fidelity-prototype/customer/dashboard.html">Dashboard</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link active" href="/high-fidelity-prototype/instructor/create-class.html">Create Class</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link active" href="/high-fidelity-prototype/instructor/schedule-class.html">Schedule</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link active" href="/high-fidelity-prototype/instructor/browse-shared.html">Browse</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="navbar-item">
-                    <a class="nav-link active" href="/high-fidelity-prototype/customer/profile.html">Profile</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/high-fidelity-prototype/home.html">NavBar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/high-fidelity-prototype/instructor/home-shared.html">Home</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="navbar-item">
+                        <a class="nav-link active" href="/high-fidelity-prototype/instructor/dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Classes
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <a class="dropdown-item" href="/high-fidelity-prototype/instructor/my-classes.html">
+                                    My Classes
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="/high-fidelity-prototype/instructor/create-class.html">
+                                    Create Class
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="/high-fidelity-prototype/instructor/schedule-class.html">
+                                    Schedule
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a class="nav-link active"
+                            href="/high-fidelity-prototype/instructor/browse-shared.html">Browse</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="navbar-item">
+                        <a class="nav-link active" href="/high-fidelity-prototype/instructor/profile.html">Profile</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
