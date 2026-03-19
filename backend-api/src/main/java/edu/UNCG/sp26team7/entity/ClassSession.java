@@ -1,5 +1,5 @@
 package edu.UNCG.sp26team7.entity;
 
-public class Class {
+public class ClassSession {
     
 }
