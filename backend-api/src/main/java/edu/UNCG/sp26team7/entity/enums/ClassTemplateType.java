@@ -1,6 +1,6 @@
 package edu.UNCG.sp26team7.entity;
 
-public enum ClassTemplateCategory {
+public enum ClassTemplateType {
   WEIGHTLIFTING,
   ZUMBA,
   YOGA,
