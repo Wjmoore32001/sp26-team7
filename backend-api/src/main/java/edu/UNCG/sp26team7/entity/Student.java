@@ -13,9 +13,9 @@ public class Student extends User {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("student")
-    private List<StudentSchedule> studentSchedules;
+    @OneToOne
+    @JoinColumn(name = "StudentSchedule_id")
+    private StudentSchedule studentSchedules;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("student")
@@ -32,11 +32,11 @@ public class Student extends User {
         this.name = name;
     }
 
-    public List<StudentSchedule> getStudentSchedules() {
+    public StudentSchedule getStudentSchedules() {
         return studentSchedules;
     }
 
-    public void setStudentSchedules(List<StudentSchedule> studentSchedules) {
+    public void setStudentSchedules(StudentSchedule studentSchedules) {
         this.studentSchedules = studentSchedules;
     }
 
