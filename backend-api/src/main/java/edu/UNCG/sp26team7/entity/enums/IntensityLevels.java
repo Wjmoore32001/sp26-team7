@@ -1,4 +1,4 @@
-package edu.UNCG.sp26team7.entity.enums;
+package edu.UNCG.sp26team7.entity;
 
 public enum IntensityLevels {
   HIGH,
