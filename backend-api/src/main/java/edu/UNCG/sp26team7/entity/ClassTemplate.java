@@ -33,9 +33,9 @@ public class ClassTemplate {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long template_id;
 
-  // @ManyToOne
-  // @JoinColumn(name = "instructor_id")
-  // private Instructor instructor;
+  @ManyToOne
+  @JoinColumn(name = "instructor_id")
+  private Instructor instructor;
 
   @Column
   private String title;
