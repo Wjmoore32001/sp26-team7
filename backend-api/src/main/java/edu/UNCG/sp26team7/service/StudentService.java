@@ -48,5 +48,5 @@ public class StudentService {
     public Student getStudentByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
-    
+
 }
