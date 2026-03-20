@@ -26,4 +26,7 @@ public class ClassTemplateService {
   }
 
   // POST Methods ----------------------------------------------------------------
+  public ClassTemplate createClassTemplate(ClassTemplate classTemplate) {
+    return classTemplateRepository.save(classTemplate);
+  }
 }
