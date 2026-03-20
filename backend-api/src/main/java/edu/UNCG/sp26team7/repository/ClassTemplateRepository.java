@@ -9,5 +9,4 @@ import edu.UNCG.sp26team7.entity.ClassTemplate;
 @Repository
 public interface ClassTemplateRepository
     extends JpaRepository<ClassTemplate, Long>, JpaSpecificationExecutor<ClassTemplate> {
-
 }

@@ -1,7 +1,6 @@
 package edu.UNCG.sp26team7.service;
 
 import org.springframework.stereotype.Service;
-
 import edu.UNCG.sp26team7.repository.ClassTemplateRepository;
 
 @Service
