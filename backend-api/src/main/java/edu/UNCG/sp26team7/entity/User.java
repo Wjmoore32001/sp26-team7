@@ -1,5 +1,6 @@
 package edu.UNCG.sp26team7.entity;
 
+import edu.UNCG.sp26team7.entity.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,9 +28,4 @@ public class User {
   @Enumerated(EnumType.STRING)
   private UserRole role;
 
-}
-
-enum UserRole {
-  STUDENT,
-  INSTRUCTOR
 }

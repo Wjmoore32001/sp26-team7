@@ -1,11 +1,20 @@
 package edu.UNCG.sp26team7.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
 @Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "students")
 @PrimaryKeyJoinColumn(name = "student_id")
 public class Student extends User {
@@ -20,32 +29,5 @@ public class Student extends User {
   @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonIgnoreProperties("student")
   private List<Review> reviews;
-
-  public Student() {
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public List<StudentSchedule> getStudentSchedules() {
-    return studentSchedules;
-  }
-
-  public void setStudentSchedules(List<StudentSchedule> studentSchedules) {
-    this.studentSchedules = studentSchedules;
-  }
-
-  public List<Review> getReviews() {
-    return reviews;
-  }
-
-  public void setReviews(List<Review> reviews) {
-    this.reviews = reviews;
-  }
 
 }

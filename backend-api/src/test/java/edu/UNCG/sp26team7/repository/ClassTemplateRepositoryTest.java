@@ -27,6 +27,17 @@ class ClassTemplateRepositoryTest {
   void creatingAndSavingAndRetrievingClassTemplate() {
 
     ClassTemplate classTemplate = new ClassTemplate();
+    ClassTemplate classTemplate2 = new ClassTemplate(
+        null,
+        null,
+        "Intro Yoga",
+        ClassType.YOGA,
+        IntensityLevels.MEDIUM,
+        60,
+        null,
+        null,
+        new BigDecimal("19.99"),
+        "Beginner yoga class");
 
     classTemplate.setTitle("Intro to Yoga");
     classTemplate.setClassType(ClassType.YOGA);
@@ -41,5 +52,10 @@ class ClassTemplateRepositoryTest {
     assertNotNull(savedTemplate.getCreatedAt());
     assertNotNull(savedTemplate.getUpdatedAt());
 
+    ClassTemplate savedTemplate2 = classTemplateRepository.save(classTemplate2);
+
+    assertNotNull(savedTemplate2.getTemplate_id());
+    assertNotNull(savedTemplate2.getCreatedAt());
+    assertNotNull(savedTemplate2.getUpdatedAt());
   }
 }
