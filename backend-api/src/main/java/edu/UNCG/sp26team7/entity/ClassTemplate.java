@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import edu.UNCG.sp26team7.entity.enums.ClassTemplateType;
+import edu.UNCG.sp26team7.entity.enums.IntensityLevels;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
