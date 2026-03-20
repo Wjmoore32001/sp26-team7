@@ -34,7 +34,7 @@ public class ClassTemplate {
   private Long template_id;
 
   @ManyToOne
-  @JoinColumn(name = "instructor_id")
+  @JoinColumn(name = "userId")
   private Instructor instructor;
 
   @Column
