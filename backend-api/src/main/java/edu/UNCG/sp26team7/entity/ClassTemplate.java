@@ -4,7 +4,7 @@ package edu.UNCG.sp26team7.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import edu.UNCG.sp26team7.entity.enums.ClassTemplateType;
+import edu.UNCG.sp26team7.entity.enums.ClassType;
 import edu.UNCG.sp26team7.entity.enums.IntensityLevels;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,16 +33,16 @@ public class ClassTemplate {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long template_id;
 
-  @ManyToOne
-  @JoinColumn(name = "instructor_id")
-  private Instructor instructor;
+  // @ManyToOne
+  // @JoinColumn(name = "instructor_id")
+  // private Instructor instructor;
 
   @Column
   private String title;
 
   @Column
   @Enumerated(EnumType.STRING)
-  private ClassTemplateType classType;
+  private ClassType classType;
 
   @Column
   @Enumerated(EnumType.STRING)
