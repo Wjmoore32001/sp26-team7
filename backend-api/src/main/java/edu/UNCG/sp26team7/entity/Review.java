@@ -16,6 +16,11 @@ public class Review {
     @JsonIgnoreProperties("reviews")
     private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "class_template_id", nullable = false)
+    @JsonIgnoreProperties("reviews")
+    private ClassTemplate classTemplate;
+
     @Column(nullable = false)
     private Integer rating;
 
@@ -62,6 +67,14 @@ public class Review {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public ClassTemplate getClassTemplate() {
+        return classTemplate;
+    }
+
+    public void setClassTemplate(ClassTemplate classTemplate) {
+        this.classTemplate = classTemplate;
     }
 
 }
