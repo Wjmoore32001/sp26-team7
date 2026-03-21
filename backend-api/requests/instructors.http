@@ -1,0 +1,35 @@
+### Get all instructors
+
+GET http://localhost:8080/instructors HTTP/1.1
+
+
+### Get one instructor
+
+GET http://localhost:8080/instructors/1 HTTP/1.1
+
+
+### Create instructor
+
+POST http://localhost:8080/instructors HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Alice Smith",
+  "email": "alice@uncg.edu",
+  "passwordHash": "hashed-password"
+}
+
+
+### Update instructor email
+
+PATCH http://localhost:8080/instructors/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "alice_new@uncg.edu"
+}
+
+
+### Delete instructor
+
+DELETE http://localhost:8080/instructors/1 HTTP/1.1
