@@ -35,10 +35,17 @@ public class InstructorService {
       return null;
     }
 
-    existingInstructor.setName(updatedInstructor.getName());
-    existingInstructor.setEmail(updatedInstructor.getEmail());
-    existingInstructor.setPasswordHash(updatedInstructor.getPasswordHash());
-    existingInstructor.setRole(updatedInstructor.getRole());
+    if (updatedInstructor.getName() != null) {
+      existingInstructor.setName(updatedInstructor.getName());
+    }
+
+    if (updatedInstructor.getEmail() != null) {
+      existingInstructor.setEmail(updatedInstructor.getEmail());
+    }
+
+    if (updatedInstructor.getPasswordHash() != null) {
+      existingInstructor.setPasswordHash(updatedInstructor.getPasswordHash());
+    }
 
     return instructorRepository.save(existingInstructor);
   }
