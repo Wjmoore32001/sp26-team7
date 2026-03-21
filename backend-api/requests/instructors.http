@@ -1,14 +1,4 @@
-### Get all instructors
-
-GET http://localhost:8080/instructors HTTP/1.1
-
-
-### Get one instructor
-
-GET http://localhost:8080/instructors/1 HTTP/1.1
-
-
-### Create instructor
+### Create Instructor 1
 
 POST http://localhost:8080/instructors HTTP/1.1
 Content-Type: application/json
@@ -16,20 +6,77 @@ Content-Type: application/json
 {
   "name": "Alice Smith",
   "email": "alice@uncg.edu",
-  "passwordHash": "hashed-password"
+  "passwordHash": "alicehash",
+  "role": "INSTRUCTOR"
 }
 
 
-### Update instructor email
+### Create Instructor 2
 
-PATCH http://localhost:8080/instructors/1 HTTP/1.1
+POST http://localhost:8080/instructors HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "alice_new@uncg.edu"
+  "name": "Bob Jones",
+  "email": "bob@uncg.edu",
+  "passwordHash": "bobhash",
+  "role": "INSTRUCTOR"
 }
 
 
-### Delete instructor
+### Create Instructor 3
 
-DELETE http://localhost:8080/instructors/1 HTTP/1.1
+POST http://localhost:8080/instructors HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Cara White",
+  "email": "cara@uncg.edu",
+  "passwordHash": "carahash",
+  "role": "INSTRUCTOR"
+}
+
+
+### Get all instructors
+
+GET http://localhost:8080/instructors HTTP/1.1
+
+
+### Get instructor with userId 1
+
+GET http://localhost:8080/instructors/1 HTTP/1.1
+
+
+### Get instructor with userId 2
+
+GET http://localhost:8080/instructors/2 HTTP/1.1
+
+
+### Update instructor 2 email only
+
+PUT http://localhost:8080/instructors/2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "bob_new@uncg.edu"
+}
+
+
+### Verify instructor 2 was updated
+
+GET http://localhost:8080/instructors/2 HTTP/1.1
+
+
+### Delete instructor 3
+
+DELETE http://localhost:8080/instructors/3 HTTP/1.1
+
+
+### Verify instructor 3 is gone
+
+GET http://localhost:8080/instructors/3 HTTP/1.1
+
+
+### Verify remaining instructors after delete
+
+GET http://localhost:8080/instructors HTTP/1.1
