@@ -67,6 +67,38 @@ class InstructorServiceTest {
   }
 
   @Test
+  void updateInstructor_onlyUpdatesNonNullFields() {
+    InstructorRepository instructorRepository = Mockito.mock(InstructorRepository.class);
+    InstructorService instructorService = new InstructorService(instructorRepository);
+
+    Instructor existingInstructor = new Instructor();
+    existingInstructor.setUserId(1L);
+    existingInstructor.setName("Old Name");
+    existingInstructor.setEmail("old@uncg.edu");
+    existingInstructor.setPasswordHash("old-hash");
+    existingInstructor.setRole(UserRole.INSTRUCTOR);
+
+    Instructor updatedInstructor = new Instructor();
+    updatedInstructor.setName("New Name");
+    updatedInstructor.setEmail(null);
+    updatedInstructor.setPasswordHash("new-hash");
+
+    when(instructorRepository.findById(1L)).thenReturn(Optional.of(existingInstructor));
+    when(instructorRepository.save(existingInstructor)).thenReturn(existingInstructor);
+
+    Instructor result = instructorService.updateInstructor(1L, updatedInstructor);
+
+    assertNotNull(result);
+    assertEquals("New Name", result.getName());
+    assertEquals("old@uncg.edu", result.getEmail());
+    assertEquals("new-hash", result.getPasswordHash());
+    assertEquals(UserRole.INSTRUCTOR, result.getRole());
+
+    verify(instructorRepository).findById(1L);
+    verify(instructorRepository).save(existingInstructor);
+  }
+
+  @Test
   void createInstructor_savesAndReturnsInstructor() {
     InstructorRepository instructorRepository = Mockito.mock(InstructorRepository.class);
     InstructorService instructorService = new InstructorService(instructorRepository);
@@ -82,7 +114,6 @@ class InstructorServiceTest {
     savedInstructor.setName("Alice Smith");
     savedInstructor.setEmail("alice@uncg.edu");
     savedInstructor.setPasswordHash("hashed-password");
-    savedInstructor.setRole(UserRole.INSTRUCTOR);
 
     when(instructorRepository.save(instructor)).thenReturn(savedInstructor);
 
@@ -111,7 +142,6 @@ class InstructorServiceTest {
     updatedInstructor.setName("New Name");
     updatedInstructor.setEmail("new@uncg.edu");
     updatedInstructor.setPasswordHash("new-hash");
-    updatedInstructor.setRole(UserRole.INSTRUCTOR);
 
     when(instructorRepository.findById(1L)).thenReturn(Optional.of(existingInstructor));
     when(instructorRepository.save(existingInstructor)).thenReturn(existingInstructor);
