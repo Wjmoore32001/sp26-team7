@@ -3,8 +3,8 @@ package edu.UNCG.sp26team7.controller;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
@@ -123,11 +123,12 @@ class InstructorControllerTest {
     updatedInstructor.setPasswordHash("hash1");
     updatedInstructor.setRole(UserRole.INSTRUCTOR);
 
-    when(instructorService.updateInstructor(org.mockito.ArgumentMatchers.eq(1L),
+    when(instructorService.updateInstructor(
+        org.mockito.ArgumentMatchers.eq(1L),
         org.mockito.ArgumentMatchers.any(Instructor.class)))
         .thenReturn(updatedInstructor);
 
-    mockMvc.perform(patch("/instructors/1")
+    mockMvc.perform(put("/instructors/1")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(updateRequest)))
         .andExpect(status().isOk())

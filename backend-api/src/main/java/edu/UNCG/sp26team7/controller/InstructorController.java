@@ -41,7 +41,7 @@ public class InstructorController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdInstructor);
   }
 
-  @PatchMapping("/{userId}")
+  @PutMapping("/{userId}")
   public ResponseEntity<Instructor> updateInstructor(
       @PathVariable Long userId,
       @RequestBody Instructor updatedInstructor) {
