@@ -59,9 +59,9 @@ class ClassTemplateControllerTest {
 
     mockMvc.perform(get("/classTemplates"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$[0].template_id").value(1))
+        .andExpect(jsonPath("$[0].classTemplateId").value(1))
         .andExpect(jsonPath("$[0].title").value("Intro Yoga"))
-        .andExpect(jsonPath("$[1].template_id").value(2))
+        .andExpect(jsonPath("$[1].classTemplateId").value(2))
         .andExpect(jsonPath("$[1].title").value("Spin Intro"));
   }
 
@@ -80,7 +80,7 @@ class ClassTemplateControllerTest {
 
     mockMvc.perform(get("/classTemplates/1"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.template_id").value(1))
+        .andExpect(jsonPath("$.classTemplateId").value(1))
         .andExpect(jsonPath("$.title").value("Intro Yoga"))
         .andExpect(jsonPath("$.description").value("Beginner yoga class"));
   }
@@ -108,7 +108,7 @@ class ClassTemplateControllerTest {
 
     mockMvc.perform(get("/classTemplates/instructor/5"))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$[0].template_id").value(1))
+        .andExpect(jsonPath("$[0].classTemplateId").value(1))
         .andExpect(jsonPath("$[0].title").value("Intro Yoga"));
   }
 
@@ -138,7 +138,7 @@ class ClassTemplateControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(requestTemplate)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.template_id").value(1))
+        .andExpect(jsonPath("$.classTemplateId").value(1))
         .andExpect(jsonPath("$.title").value("Intro Yoga"));
   }
 
@@ -165,7 +165,7 @@ class ClassTemplateControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(updateRequest)))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.template_id").value(1))
+        .andExpect(jsonPath("$.classTemplateId").value(1))
         .andExpect(jsonPath("$.description").value("Updated description"));
   }
 
