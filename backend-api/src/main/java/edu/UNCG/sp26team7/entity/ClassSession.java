@@ -22,6 +22,6 @@ public class ClassSession {
   private LocalDateTime scheduledAt;
 
   @ManyToOne
-  @JoinColumn(name = "template_id", nullable = false)
+  @JoinColumn(name = "class_template_id", nullable = false)
   private ClassTemplate classTemplate;
 }

@@ -38,7 +38,7 @@ class ClassTemplateControllerTest {
   @Test
   void getAllClassTemplates_returnsList() throws Exception {
     ClassTemplate template1 = new ClassTemplate();
-    template1.setTemplate_id(1L);
+    template1.setClassTemplateId(1L);
     template1.setTitle("Intro Yoga");
     template1.setClassType(ClassType.YOGA);
     template1.setIntensity(IntensityLevels.MEDIUM);
@@ -47,7 +47,7 @@ class ClassTemplateControllerTest {
     template1.setDescription("Beginner yoga class");
 
     ClassTemplate template2 = new ClassTemplate();
-    template2.setTemplate_id(2L);
+    template2.setClassTemplateId(2L);
     template2.setTitle("Spin Intro");
     template2.setClassType(ClassType.CYCLING);
     template2.setIntensity(IntensityLevels.HIGH);
@@ -68,7 +68,7 @@ class ClassTemplateControllerTest {
   @Test
   void getClassTemplateById_returnsTemplateWhenFound() throws Exception {
     ClassTemplate template = new ClassTemplate();
-    template.setTemplate_id(1L);
+    template.setClassTemplateId(1L);
     template.setTitle("Intro Yoga");
     template.setClassType(ClassType.YOGA);
     template.setIntensity(IntensityLevels.MEDIUM);
@@ -96,7 +96,7 @@ class ClassTemplateControllerTest {
   @Test
   void getInstructorTemplates_returnsList() throws Exception {
     ClassTemplate template = new ClassTemplate();
-    template.setTemplate_id(1L);
+    template.setClassTemplateId(1L);
     template.setTitle("Intro Yoga");
     template.setClassType(ClassType.YOGA);
     template.setIntensity(IntensityLevels.MEDIUM);
@@ -123,7 +123,7 @@ class ClassTemplateControllerTest {
     requestTemplate.setDescription("Beginner yoga class");
 
     ClassTemplate createdTemplate = new ClassTemplate();
-    createdTemplate.setTemplate_id(1L);
+    createdTemplate.setClassTemplateId(1L);
     createdTemplate.setTitle("Intro Yoga");
     createdTemplate.setClassType(ClassType.YOGA);
     createdTemplate.setIntensity(IntensityLevels.MEDIUM);
@@ -148,7 +148,7 @@ class ClassTemplateControllerTest {
     updateRequest.setDescription("Updated description");
 
     ClassTemplate updatedTemplate = new ClassTemplate();
-    updatedTemplate.setTemplate_id(1L);
+    updatedTemplate.setClassTemplateId(1L);
     updatedTemplate.setTitle("Intro Yoga");
     updatedTemplate.setClassType(ClassType.YOGA);
     updatedTemplate.setIntensity(IntensityLevels.MEDIUM);

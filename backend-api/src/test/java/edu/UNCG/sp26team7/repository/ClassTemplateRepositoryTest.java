@@ -48,13 +48,13 @@ class ClassTemplateRepositoryTest {
 
     ClassTemplate savedTemplate = classTemplateRepository.save(classTemplate);
 
-    assertNotNull(savedTemplate.getTemplate_id());
+    assertNotNull(savedTemplate.getClassTemplateId());
     assertNotNull(savedTemplate.getCreatedAt());
     assertNotNull(savedTemplate.getUpdatedAt());
 
     ClassTemplate savedTemplate2 = classTemplateRepository.save(classTemplate2);
 
-    assertNotNull(savedTemplate2.getTemplate_id());
+    assertNotNull(savedTemplate2.getClassTemplateId());
     assertNotNull(savedTemplate2.getCreatedAt());
     assertNotNull(savedTemplate2.getUpdatedAt());
   }

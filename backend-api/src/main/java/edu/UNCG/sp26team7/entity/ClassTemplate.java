@@ -31,7 +31,7 @@ public class ClassTemplate {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long template_id;
+  private Long classTemplateId;
 
   @ManyToOne
   @JoinColumn(name = "userId")

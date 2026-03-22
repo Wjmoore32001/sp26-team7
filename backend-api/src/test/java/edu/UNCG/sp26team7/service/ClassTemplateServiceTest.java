@@ -59,7 +59,7 @@ class ClassTemplateServiceTest {
     classTemplate.setDescription("Beginner yoga class");
 
     ClassTemplate savedTemplate = new ClassTemplate();
-    savedTemplate.setTemplate_id(1L);
+    savedTemplate.setClassTemplateId(1L);
     savedTemplate.setTitle("Intro Yoga");
     savedTemplate.setClassType(ClassType.YOGA);
     savedTemplate.setIntensity(IntensityLevels.MEDIUM);
@@ -71,7 +71,7 @@ class ClassTemplateServiceTest {
 
     ClassTemplate result = classTemplateService.createClassTemplate(classTemplate);
 
-    assertEquals(1L, result.getTemplate_id());
+    assertEquals(1L, result.getClassTemplateId());
     assertEquals("Intro Yoga", result.getTitle());
     assertEquals(ClassType.YOGA, result.getClassType());
     assertEquals(IntensityLevels.MEDIUM, result.getIntensity());
