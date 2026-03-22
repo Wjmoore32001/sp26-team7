@@ -1,10 +1,17 @@
 package edu.UNCG.sp26team7.entity;
 
 import jakarta.persistence.*;
+import edu.UNCG.sp26team7.entity.enums.BookingStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "student_schedule", uniqueConstraints = {
     @UniqueConstraint(columnNames = { "student_id", "class_session_id" }) })
 public class StudentSchedule {
@@ -30,49 +37,4 @@ public class StudentSchedule {
   @Column(nullable = false)
   private BookingStatus bookingStatus;
 
-  public StudentSchedule() {
-  }
-
-  public Long getStudentScheduleId() {
-    return studentScheduleId;
-  }
-
-  public Student getStudent() {
-    return student;
-  }
-
-  public void setStudent(Student student) {
-    this.student = student;
-  }
-
-  public ClassSession getClassSession() {
-    return classSession;
-  }
-
-  public void setClassSession(ClassSession classSession) {
-    this.classSession = classSession;
-  }
-
-  public LocalDateTime getEnrolledAt() {
-    return enrolledAt;
-  }
-
-  public void setEnrolledAt(LocalDateTime enrolledAt) {
-    this.enrolledAt = enrolledAt;
-  }
-
-  public BookingStatus getBookingStatus() {
-    return bookingStatus;
-  }
-
-  public void setBookingStatus(BookingStatus bookingStatus) {
-    this.bookingStatus = bookingStatus;
-  }
-
-}
-
-enum BookingStatus {
-  ENROLLED,
-  CANCELLED,
-  WAITLISTED
 }
