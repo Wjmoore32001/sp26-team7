@@ -1,6 +1,7 @@
 package edu.UNCG.sp26team7.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -32,49 +33,45 @@ public class EnrollmentService {
   }
 
   public List<Enrollment> getEnrollmentsByClassSessionId(Long classSessionId) {
-    return enrollmentRepository.findByClassSessionId(classSessionId);
+    return enrollmentRepository.findByClassSessionClassSessionId(classSessionId);
   }
 
   public List<Enrollment> getEnrollmentsByStudentId(Long studentId) {
-    return enrollmentRepository.findByStudentId(studentId);
+    return enrollmentRepository.findByStudentUserId(studentId);
   }
 
   public Enrollment createEnrollment(Enrollment enrollment) {
-    if (enrollment.getClassSessionId() == null || enrollment.getStudentId() == null) {
-      return null;
+    if (enrollment.getStudent() == null || enrollment.getStudent().getUserId() == null) {
+      throw new RuntimeException("Student id is required");
     }
 
-    ClassSession classSession = classSessionRepository.findById(enrollment.getClassSessionId()).orElse(null);
-
-    if (classSession == null) {
-      return null;
+    if (enrollment.getClassSession() == null || enrollment.getClassSession().getClassSessionId() == null) {
+      throw new RuntimeException("Class session id is required");
     }
 
-    Student student = studentRepository.findById(enrollment.getStudentId()).orElse(null);
+    Student realStudent = studentRepository
+        .findById(enrollment.getStudent().getUserId())
+        .orElseThrow(() -> new RuntimeException("Student not found"));
 
-    if (student == null) {
-      return null;
-    }
+    ClassSession realClassSession = classSessionRepository
+        .findById(enrollment.getClassSession().getClassSessionId())
+        .orElseThrow(() -> new RuntimeException("Class session not found"));
 
-    if (enrollmentRepository.existsByClassSessionIdAndStudentId(
-        enrollment.getClassSessionId(),
-        enrollment.getStudentId())) {
-      return null;
-    }
+    enrollment.setStudent(realStudent);
+    enrollment.setClassSession(realClassSession);
 
     return enrollmentRepository.save(enrollment);
   }
 
-  public boolean deleteEnrollment(Long classSessionId, Long studentId) {
-    Enrollment enrollment = enrollmentRepository
-        .findByClassSessionIdAndStudentId(classSessionId, studentId)
-        .orElse(null);
+  public Optional<Enrollment> getEnrollmentById(Long id) {
+    return enrollmentRepository.findById(id);
+  }
 
-    if (enrollment == null) {
-      return false;
-    }
+  public List<Enrollment> getAllStudentSchedules() {
+    return enrollmentRepository.findAll();
+  }
 
-    enrollmentRepository.delete(enrollment);
-    return true;
+  public void deleteEnrollment(Long enrollment) {
+    enrollmentRepository.deleteById(enrollment);
   }
 }

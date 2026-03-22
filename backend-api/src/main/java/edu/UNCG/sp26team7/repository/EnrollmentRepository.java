@@ -11,11 +11,11 @@ import edu.UNCG.sp26team7.entity.Enrollment;
 @Repository
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
-  List<Enrollment> findByClassSessionId(Long classSessionId);
+  List<Enrollment> findByClassSessionClassSessionId(Long classSessionId);
 
-  List<Enrollment> findByStudentId(Long studentId);
+  List<Enrollment> findByStudentUserId(Long studentId);
 
-  Optional<Enrollment> findByClassSessionIdAndStudentId(Long classSessionId, Long studentId);
+  Optional<Enrollment> findByClassSessionClassSessionIdAndStudentUserId(Long classSessionId, Long studentId);
 
-  boolean existsByClassSessionIdAndStudentId(Long classSessionId, Long studentId);
+  boolean existsByClassSessionClassSessionIdAndStudentUserId(long l, Long studentId);
 }

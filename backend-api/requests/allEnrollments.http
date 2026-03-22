@@ -4,8 +4,12 @@ POST http://localhost:8080/enrollments HTTP/1.1
 Content-Type: application/json
 
 {
-  "classSessionId": 1,
-  "studentId": 1
+  "classSession": {
+    "classSessionId": 1
+  },
+  "student": {
+    "userId": 4
+  }
 }
 
 
@@ -15,8 +19,12 @@ POST http://localhost:8080/enrollments HTTP/1.1
 Content-Type: application/json
 
 {
-  "classSessionId": 1,
-  "studentId": 2
+  "classSession": {
+    "classSessionId": 1
+  },
+  "student": {
+    "userId": 5
+  }
 }
 
 
@@ -26,8 +34,12 @@ POST http://localhost:8080/enrollments HTTP/1.1
 Content-Type: application/json
 
 {
-  "classSessionId": 2,
-  "studentId": 1
+  "classSession": {
+    "classSessionId": 2
+  },
+  "student": {
+    "userId": 4
+  }
 }
 
 

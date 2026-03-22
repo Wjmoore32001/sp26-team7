@@ -54,11 +54,6 @@ Content-Type: application/json
 GET http://localhost:8080/api/students/5 HTTP/1.1
 
 
-### Delete student 2 (user 5)
-
-DELETE http://localhost:8080/api/students/5 HTTP/1.1
-
-
 ### Verify remaining students
 
 GET http://localhost:8080/api/students HTTP/1.1
