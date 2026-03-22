@@ -1,0 +1,77 @@
+### Create ClassSession 1 for class template 1
+
+POST http://localhost:8080/classSessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "classTemplate": {
+    "classTemplateId": 1
+  },
+  "scheduledAt": "2026-04-20T10:00:00"
+}
+
+
+### Create ClassSession 2 for class template 1
+
+POST http://localhost:8080/classSessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "classTemplate": {
+    "classTemplateId": 1
+  },
+  "scheduledAt": "2026-04-21T14:00:00"
+}
+
+
+### Create ClassSession 3 for class template 2
+
+POST http://localhost:8080/classSessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "classTemplate": {
+    "classTemplateId": 2
+  },
+  "scheduledAt": "2026-04-22T09:30:00"
+}
+
+
+### Get all class sessions
+
+GET http://localhost:8080/classSessions HTTP/1.1
+
+
+### Get class session 1
+
+GET http://localhost:8080/classSessions/1 HTTP/1.1
+
+
+### Get all sessions for class template 1
+
+GET http://localhost:8080/classSessions/classTemplate/1 HTTP/1.1
+
+
+### Update class session 2 date/time
+
+PUT http://localhost:8080/classSessions/2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "scheduledAt": "2026-04-21T16:00:00"
+}
+
+
+### Verify class session 2 was updated
+
+GET http://localhost:8080/classSessions/2 HTTP/1.1
+
+
+### Delete class session 3
+
+DELETE http://localhost:8080/classSessions/3 HTTP/1.1
+
+
+### Verify remaining class sessions
+
+GET http://localhost:8080/classSessions HTTP/1.1

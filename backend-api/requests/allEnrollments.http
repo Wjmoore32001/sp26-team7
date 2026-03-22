@@ -1,0 +1,56 @@
+### Create Enrollment: student 1 in class session 1
+
+POST http://localhost:8080/enrollments HTTP/1.1
+Content-Type: application/json
+
+{
+  "classSessionId": 1,
+  "studentId": 1
+}
+
+
+### Create Enrollment: student 2 in class session 1
+
+POST http://localhost:8080/enrollments HTTP/1.1
+Content-Type: application/json
+
+{
+  "classSessionId": 1,
+  "studentId": 2
+}
+
+
+### Create Enrollment: student 1 in class session 2
+
+POST http://localhost:8080/enrollments HTTP/1.1
+Content-Type: application/json
+
+{
+  "classSessionId": 2,
+  "studentId": 1
+}
+
+
+### Get all enrollments
+
+GET http://localhost:8080/enrollments HTTP/1.1
+
+
+### Get all enrollments for class session 1
+
+GET http://localhost:8080/enrollments/classSession/1 HTTP/1.1
+
+
+### Get all enrollments for student 1
+
+GET http://localhost:8080/enrollments/student/1 HTTP/1.1
+
+
+### Delete enrollment for class session 1 / student 2
+
+DELETE http://localhost:8080/enrollments/classSession/1/student/2 HTTP/1.1
+
+
+### Verify student 2 enrollments now
+
+GET http://localhost:8080/enrollments/student/2 HTTP/1.1
