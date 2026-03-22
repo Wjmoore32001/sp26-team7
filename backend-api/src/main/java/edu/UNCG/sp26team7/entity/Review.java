@@ -1,9 +1,15 @@
 package edu.UNCG.sp26team7.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "reviews")
 public class Review {
 
@@ -29,52 +35,5 @@ public class Review {
 
   @Column(columnDefinition = "TEXT")
   private String replyText;
-
-  public Review() {
-  }
-
-  public Long getReviewId() {
-    return reviewId;
-  }
-
-  public Integer getRating() {
-    return rating;
-  }
-
-  public void setRating(Integer rating) {
-    this.rating = rating;
-  }
-
-  public String getComment() {
-    return comment;
-  }
-
-  public void setComment(String comment) {
-    this.comment = comment;
-  }
-
-  public String getReplyText() {
-    return replyText;
-  }
-
-  public void setReplyText(String replyText) {
-    this.replyText = replyText;
-  }
-
-  public Student getStudent() {
-    return student;
-  }
-
-  public void setStudent(Student student) {
-    this.student = student;
-  }
-
-  public ClassTemplate getClassTemplate() {
-    return classTemplate;
-  }
-
-  public void setClassTemplate(ClassTemplate classTemplate) {
-    this.classTemplate = classTemplate;
-  }
 
 }
