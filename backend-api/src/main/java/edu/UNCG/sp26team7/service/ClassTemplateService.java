@@ -51,7 +51,7 @@ public class ClassTemplateService {
       existingClassTemplate.setIntensity(updatedClassTemplate.getIntensity());
     }
 
-    if (updatedClassTemplate.getDuration() != 0) {
+    if (updatedClassTemplate.getDuration() != null) {
       existingClassTemplate.setDuration(updatedClassTemplate.getDuration());
     }
 

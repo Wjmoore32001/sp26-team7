@@ -6,11 +6,11 @@ Content-Type: application/json
 {
   "bookingStatus": "ENROLLED",
   "classSession": {
-    "session_id": 1
+    "classSessionId": 1
   },
   "enrolledAt": "2026-04-20T09:00:00",
   "student": {
-    "userId": 1
+    "userId": 4
   }
 }
 
@@ -27,7 +27,7 @@ Content-Type: application/json
   },
   "enrolledAt": "2026-04-20T09:05:00",
   "student": {
-    "userId": 2
+    "userId": 4
   }
 }
 
@@ -44,7 +44,7 @@ Content-Type: application/json
   },
   "enrolledAt": "2026-04-21T13:45:00",
   "student": {
-    "userId": 1
+    "userId": 4
   }
 }
 
