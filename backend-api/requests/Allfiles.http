@@ -1,6 +1,12 @@
-### Create Instructor 1
+### Base URL
+@baseUrl = http://localhost:8080
 
-POST http://localhost:8080/instructors HTTP/1.1
+### -----------------------------------------------------------------
+### INSTRUCTORS
+### -----------------------------------------------------------------
+
+### Create Instructor 1 (userId should become 1)
+POST {{baseUrl}}/instructors HTTP/1.1
 Content-Type: application/json
 
 {
@@ -10,10 +16,8 @@ Content-Type: application/json
   "role": "INSTRUCTOR"
 }
 
-
-### Create Instructor 2
-
-POST http://localhost:8080/instructors HTTP/1.1
+### Create Instructor 2 (userId should become 2)
+POST {{baseUrl}}/instructors HTTP/1.1
 Content-Type: application/json
 
 {
@@ -23,10 +27,8 @@ Content-Type: application/json
   "role": "INSTRUCTOR"
 }
 
-
-### Create Instructor 3
-
-POST http://localhost:8080/instructors HTTP/1.1
+### Create Instructor 3 (userId should become 3)
+POST {{baseUrl}}/instructors HTTP/1.1
 Content-Type: application/json
 
 {
@@ -36,50 +38,41 @@ Content-Type: application/json
   "role": "INSTRUCTOR"
 }
 
-
 ### Get all instructors
-
-GET http://localhost:8080/instructors HTTP/1.1
-
+GET {{baseUrl}}/instructors HTTP/1.1
 
 ### Get instructor with userId 1
-
-GET http://localhost:8080/instructors/1 HTTP/1.1
-
+GET {{baseUrl}}/instructors/1 HTTP/1.1
 
 ### Get instructor with userId 2
-
-GET http://localhost:8080/instructors/2 HTTP/1.1
-
+GET {{baseUrl}}/instructors/2 HTTP/1.1
 
 ### Update instructor 2 email only
-
-PUT http://localhost:8080/instructors/2 HTTP/1.1
+PUT {{baseUrl}}/instructors/2 HTTP/1.1
 Content-Type: application/json
 
 {
   "email": "bob_new@uncg.edu"
 }
 
-
 ### Verify instructor 2 was updated
-
-GET http://localhost:8080/instructors/2 HTTP/1.1
-
+GET {{baseUrl}}/instructors/2 HTTP/1.1
 
 ### Delete instructor 3
-
-DELETE http://localhost:8080/instructors/3 HTTP/1.1
-
+DELETE {{baseUrl}}/instructors/3 HTTP/1.1
 
 ### Verify remaining instructors after delete
+GET {{baseUrl}}/instructors HTTP/1.1
 
-GET http://localhost:8080/instructors HTTP/1.1
+### -----------------------------------------------------------------
+### STUDENTS
+### Note: because the 3 instructors are created first, the first student
+### gets userId 4, the second student gets userId 5, and the extra demo
+### student below gets userId 6.
+### -----------------------------------------------------------------
 
-
-### Create Student 1 (user 4)
-
-POST http://localhost:8080/api/students HTTP/1.1
+### Create Student 1 (userId 4)
+POST {{baseUrl}}/api/students HTTP/1.1
 Content-Type: application/json
 
 {
@@ -89,10 +82,8 @@ Content-Type: application/json
   "role": "STUDENT"
 }
 
-
-### Create Student 2 (user 5)
-
-POST http://localhost:8080/api/students HTTP/1.1
+### Create Student 2 (userId 5)
+POST {{baseUrl}}/api/students HTTP/1.1
 Content-Type: application/json
 
 {
@@ -102,45 +93,49 @@ Content-Type: application/json
   "role": "STUDENT"
 }
 
+### Create Student 3 for delete demo (userId 6)
+POST {{baseUrl}}/api/students HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "faye@uncg.edu",
+  "name": "Faye Black",
+  "passwordHash": "fayehash",
+  "role": "STUDENT"
+}
 
 ### Get all students
-
-GET http://localhost:8080/api/students HTTP/1.1
-
+GET {{baseUrl}}/api/students HTTP/1.1
 
 ### Get student with id 4
-
-GET http://localhost:8080/api/students/4 HTTP/1.1
-
+GET {{baseUrl}}/api/students/4 HTTP/1.1
 
 ### Get student by email
+GET {{baseUrl}}/api/students/email/dana@uncg.edu HTTP/1.1
 
-GET http://localhost:8080/api/students/email/dana@uncg.edu HTTP/1.1
-
-
-### Update student 2 (user 5) email only
-
-PUT http://localhost:8080/api/students/5 HTTP/1.1
+### Update student 2 (userId 5) email only
+PUT {{baseUrl}}/api/students/5 HTTP/1.1
 Content-Type: application/json
 
 {
   "email": "eli_new@uncg.edu"
 }
 
+### Verify student 2 (userId 5) was updated
+GET {{baseUrl}}/api/students/5 HTTP/1.1
 
-### Verify student 2 (user 5) was updated
-
-GET http://localhost:8080/api/students/5 HTTP/1.1
-
+### Delete extra student 3 (userId 6)
+DELETE {{baseUrl}}/api/students/6 HTTP/1.1
 
 ### Verify remaining students
+GET {{baseUrl}}/api/students HTTP/1.1
 
-GET http://localhost:8080/api/students HTTP/1.1
-
+### -----------------------------------------------------------------
+### CLASS TEMPLATES
+### -----------------------------------------------------------------
 
 ### Create ClassTemplate 1 for instructor 1
-
-POST http://localhost:8080/classTemplates HTTP/1.1
+POST {{baseUrl}}/classTemplates HTTP/1.1
 Content-Type: application/json
 
 {
@@ -155,10 +150,8 @@ Content-Type: application/json
   "title": "Intro Yoga"
 }
 
-
 ### Create ClassTemplate 2 for instructor 1
-
-POST http://localhost:8080/classTemplates HTTP/1.1
+POST {{baseUrl}}/classTemplates HTTP/1.1
 Content-Type: application/json
 
 {
@@ -173,10 +166,8 @@ Content-Type: application/json
   "title": "Morning Burn"
 }
 
-
 ### Create ClassTemplate 3 for instructor 2
-
-POST http://localhost:8080/classTemplates HTTP/1.1
+POST {{baseUrl}}/classTemplates HTTP/1.1
 Content-Type: application/json
 
 {
@@ -191,65 +182,47 @@ Content-Type: application/json
   "title": "Spin Intro"
 }
 
-
 ### Get all class templates
-
-GET http://localhost:8080/classTemplates HTTP/1.1
-
+GET {{baseUrl}}/classTemplates HTTP/1.1
 
 ### Get class template with templateId 1
-
-GET http://localhost:8080/classTemplates/1 HTTP/1.1
-
+GET {{baseUrl}}/classTemplates/1 HTTP/1.1
 
 ### Get class template with templateId 2
-
-GET http://localhost:8080/classTemplates/2 HTTP/1.1
-
+GET {{baseUrl}}/classTemplates/2 HTTP/1.1
 
 ### Get all templates for instructor 1
-
-GET http://localhost:8080/classTemplates/instructor/1 HTTP/1.1
-
+GET {{baseUrl}}/classTemplates/instructor/1 HTTP/1.1
 
 ### Get all templates for instructor 2
-
-GET http://localhost:8080/classTemplates/instructor/2 HTTP/1.1
-
+GET {{baseUrl}}/classTemplates/instructor/2 HTTP/1.1
 
 ### Update class template 2 description only
-
-PUT http://localhost:8080/classTemplates/2 HTTP/1.1
+PUT {{baseUrl}}/classTemplates/2 HTTP/1.1
 Content-Type: application/json
 
 {
   "description": "Updated cardio workout description"
 }
 
-
 ### Verify class template 2 was updated
-
-GET http://localhost:8080/classTemplates/2 HTTP/1.1
-
+GET {{baseUrl}}/classTemplates/2 HTTP/1.1
 
 ### Delete class template 3
-
-DELETE http://localhost:8080/classTemplates/3 HTTP/1.1
-
+DELETE {{baseUrl}}/classTemplates/3 HTTP/1.1
 
 ### Verify templates for instructor 2 after delete
-
-GET http://localhost:8080/classTemplates/instructor/2 HTTP/1.1
-
+GET {{baseUrl}}/classTemplates/instructor/2 HTTP/1.1
 
 ### Verify all remaining class templates
+GET {{baseUrl}}/classTemplates HTTP/1.1
 
-GET http://localhost:8080/classTemplates HTTP/1.1
-
+### -----------------------------------------------------------------
+### CLASS SESSIONS
+### -----------------------------------------------------------------
 
 ### Create ClassSession 1 for class template 1
-
-POST http://localhost:8080/classSessions HTTP/1.1
+POST {{baseUrl}}/classSessions HTTP/1.1
 Content-Type: application/json
 
 {
@@ -259,10 +232,8 @@ Content-Type: application/json
   "scheduledAt": "2026-04-20T10:00:00"
 }
 
-
 ### Create ClassSession 2 for class template 1
-
-POST http://localhost:8080/classSessions HTTP/1.1
+POST {{baseUrl}}/classSessions HTTP/1.1
 Content-Type: application/json
 
 {
@@ -272,10 +243,8 @@ Content-Type: application/json
   "scheduledAt": "2026-04-21T14:00:00"
 }
 
-
 ### Create ClassSession 3 for class template 2
-
-POST http://localhost:8080/classSessions HTTP/1.1
+POST {{baseUrl}}/classSessions HTTP/1.1
 Content-Type: application/json
 
 {
@@ -285,50 +254,38 @@ Content-Type: application/json
   "scheduledAt": "2026-04-22T09:30:00"
 }
 
-
 ### Get all class sessions
-
-GET http://localhost:8080/classSessions HTTP/1.1
-
+GET {{baseUrl}}/classSessions HTTP/1.1
 
 ### Get class session 1
-
-GET http://localhost:8080/classSessions/1 HTTP/1.1
-
+GET {{baseUrl}}/classSessions/1 HTTP/1.1
 
 ### Get all sessions for class template 1
-
-GET http://localhost:8080/classSessions/classTemplate/1 HTTP/1.1
-
+GET {{baseUrl}}/classSessions/classTemplate/1 HTTP/1.1
 
 ### Update class session 2 date/time
-
-PUT http://localhost:8080/classSessions/2 HTTP/1.1
+PUT {{baseUrl}}/classSessions/2 HTTP/1.1
 Content-Type: application/json
 
 {
   "scheduledAt": "2026-04-21T16:00:00"
 }
 
-
 ### Verify class session 2 was updated
-
-GET http://localhost:8080/classSessions/2 HTTP/1.1
-
+GET {{baseUrl}}/classSessions/2 HTTP/1.1
 
 ### Delete class session 3
-
-DELETE http://localhost:8080/classSessions/3 HTTP/1.1
-
+DELETE {{baseUrl}}/classSessions/3 HTTP/1.1
 
 ### Verify remaining class sessions
+GET {{baseUrl}}/classSessions HTTP/1.1
 
-GET http://localhost:8080/classSessions HTTP/1.1
+### -----------------------------------------------------------------
+### ENROLLMENTS
+### -----------------------------------------------------------------
 
-
-### Create Enrollment: student 1 in class session 1
-
-POST http://localhost:8080/enrollments HTTP/1.1
+### Create Enrollment 1: student 4 in class session 1
+POST {{baseUrl}}/enrollments HTTP/1.1
 Content-Type: application/json
 
 {
@@ -340,10 +297,8 @@ Content-Type: application/json
   }
 }
 
-
-### Create Enrollment: student 2 in class session 1
-
-POST http://localhost:8080/enrollments HTTP/1.1
+### Create Enrollment 2: student 5 in class session 1
+POST {{baseUrl}}/enrollments HTTP/1.1
 Content-Type: application/json
 
 {
@@ -355,10 +310,8 @@ Content-Type: application/json
   }
 }
 
-
-### Create Enrollment: student 1 in class session 2
-
-POST http://localhost:8080/enrollments HTTP/1.1
+### Create Enrollment 3: student 4 in class session 2
+POST {{baseUrl}}/enrollments HTTP/1.1
 Content-Type: application/json
 
 {
@@ -370,35 +323,33 @@ Content-Type: application/json
   }
 }
 
-
 ### Get all enrollments
-
-GET http://localhost:8080/enrollments HTTP/1.1
-
+GET {{baseUrl}}/enrollments HTTP/1.1
 
 ### Get all enrollments for class session 1
+GET {{baseUrl}}/enrollments/classSession/1 HTTP/1.1
 
-GET http://localhost:8080/enrollments/classSession/1 HTTP/1.1
+### Get all enrollments for student 4
+GET {{baseUrl}}/enrollments/student/4 HTTP/1.1
 
-
-### Get all enrollments for student 1
-
-GET http://localhost:8080/enrollments/student/5 HTTP/1.1
-
+### Get all enrollments for student 5
+GET {{baseUrl}}/enrollments/student/5 HTTP/1.1
 
 ### Delete enrollment 1
+DELETE {{baseUrl}}/enrollments/1 HTTP/1.1
 
-DELETE http://localhost:8080/enrollments/1 HTTP/1.1
+### Verify student 4 enrollments now
+GET {{baseUrl}}/enrollments/student/4 HTTP/1.1
 
+### Verify student 5 enrollments now
+GET {{baseUrl}}/enrollments/student/5 HTTP/1.1
 
-### Verify student 2 enrollments now
-
-GET http://localhost:8080/enrollments/student/5 HTTP/1.1
-
+### -----------------------------------------------------------------
+### STUDENT SCHEDULES
+### -----------------------------------------------------------------
 
 ### Create StudentSchedule 1
-
-POST http://localhost:8080/api/student-schedules HTTP/1.1
+POST {{baseUrl}}/api/student-schedules HTTP/1.1
 Content-Type: application/json
 
 {
@@ -412,10 +363,8 @@ Content-Type: application/json
   }
 }
 
-
 ### Create StudentSchedule 2
-
-POST http://localhost:8080/api/student-schedules HTTP/1.1
+POST {{baseUrl}}/api/student-schedules HTTP/1.1
 Content-Type: application/json
 
 {
@@ -429,10 +378,8 @@ Content-Type: application/json
   }
 }
 
-
 ### Create StudentSchedule 3
-
-POST http://localhost:8080/api/student-schedules HTTP/1.1
+POST {{baseUrl}}/api/student-schedules HTTP/1.1
 Content-Type: application/json
 
 {
@@ -446,30 +393,24 @@ Content-Type: application/json
   }
 }
 
-
 ### Get all student schedules
-
-GET http://localhost:8080/api/student-schedules HTTP/1.1
-
+GET {{baseUrl}}/api/student-schedules HTTP/1.1
 
 ### Get student schedule with id 1
-
-GET http://localhost:8080/api/student-schedules/1 HTTP/1.1
-
+GET {{baseUrl}}/api/student-schedules/1 HTTP/1.1
 
 ### Delete student schedule 2
-
-DELETE http://localhost:8080/api/student-schedules/2 HTTP/1.1
-
+DELETE {{baseUrl}}/api/student-schedules/2 HTTP/1.1
 
 ### Verify remaining student schedules
+GET {{baseUrl}}/api/student-schedules HTTP/1.1
 
-GET http://localhost:8080/api/student-schedules HTTP/1.1
-
+### -----------------------------------------------------------------
+### REVIEWS
+### -----------------------------------------------------------------
 
 ### Create Review 1
-
-POST http://localhost:8080/api/reviews HTTP/1.1
+POST {{baseUrl}}/api/reviews HTTP/1.1
 Content-Type: application/json
 
 {
@@ -484,10 +425,8 @@ Content-Type: application/json
   }
 }
 
-
 ### Create Review 2
-
-POST http://localhost:8080/api/reviews HTTP/1.1
+POST {{baseUrl}}/api/reviews HTTP/1.1
 Content-Type: application/json
 
 {
@@ -502,42 +441,28 @@ Content-Type: application/json
   }
 }
 
-
 ### Get all reviews
-
-GET http://localhost:8080/api/reviews HTTP/1.1
-
+GET {{baseUrl}}/api/reviews HTTP/1.1
 
 ### Get review with id 1
-
-GET http://localhost:8080/api/reviews/1 HTTP/1.1
-
+GET {{baseUrl}}/api/reviews/1 HTTP/1.1
 
 ### Get reviews by class template id 1
-
-GET http://localhost:8080/api/reviews/class-template/1 HTTP/1.1
-
+GET {{baseUrl}}/api/reviews/class-template/1 HTTP/1.1
 
 ### Update review 1 with reply text
-
-PUT http://localhost:8080/api/reviews/1 HTTP/1.1
+PUT {{baseUrl}}/api/reviews/1 HTTP/1.1
 Content-Type: application/json
 
 {
   "replyText": "Thank you for the feedback!"
 }
 
-
 ### Verify review 1 was updated
-
-GET http://localhost:8080/api/reviews/1 HTTP/1.1
-
+GET {{baseUrl}}/api/reviews/1 HTTP/1.1
 
 ### Delete review 2
-
-DELETE http://localhost:8080/api/reviews/2 HTTP/1.1
-
+DELETE {{baseUrl}}/api/reviews/2 HTTP/1.1
 
 ### Verify remaining reviews
-
-GET http://localhost:8080/api/reviews HTTP/1.1
+GET {{baseUrl}}/api/reviews HTTP/1.1
