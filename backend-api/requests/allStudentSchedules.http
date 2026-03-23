@@ -23,7 +23,7 @@ Content-Type: application/json
 {
   "bookingStatus": "WAITLISTED",
   "classSession": {
-    "session_id": 1
+    "classSessionId": 2
   },
   "enrolledAt": "2026-04-20T09:05:00",
   "student": {
@@ -40,7 +40,7 @@ Content-Type: application/json
 {
   "bookingStatus": "ENROLLED",
   "classSession": {
-    "session_id": 2
+    "classSessionId": 2
   },
   "enrolledAt": "2026-04-21T13:45:00",
   "student": {

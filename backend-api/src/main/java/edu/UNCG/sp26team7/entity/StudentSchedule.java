@@ -5,13 +5,14 @@ import edu.UNCG.sp26team7.entity.enums.BookingStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "student_schedule", uniqueConstraints = {
     @UniqueConstraint(columnNames = { "student_id", "class_session_id" }) })
 public class StudentSchedule {
@@ -22,7 +23,7 @@ public class StudentSchedule {
 
   @ManyToOne
   @JoinColumn(name = "student_id", nullable = false)
-  @JsonIgnoreProperties("studentSchedules")
+  @JsonIgnoreProperties({ "studentSchedules", "reviews" })
   private Student student;
 
   @ManyToOne
@@ -31,6 +32,7 @@ public class StudentSchedule {
   private ClassSession classSession;
 
   @Column(nullable = false)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
   private LocalDateTime enrolledAt;
 
   @Enumerated(EnumType.STRING)

@@ -5,13 +5,13 @@ Content-Type: application/json
 
 {
   "classTemplate": {
-    "template_id": 1
+    "classTemplateId": 1
   },
   "comment": "Great class for beginners",
   "rating": 5,
   "replyText": null,
   "student": {
-    "userId": 1
+    "userId": 4
   }
 }
 
@@ -29,7 +29,7 @@ Content-Type: application/json
   "rating": 4,
   "replyText": null,
   "student": {
-    "userId": 1
+    "userId": 5
   }
 }
 

@@ -45,9 +45,9 @@ public class EnrollmentController {
     return ResponseEntity.status(HttpStatus.CREATED).body(createdEnrollment);
   }
 
-  @DeleteMapping("/classSession/{enrollmentId}")
-  public ResponseEntity<Void> deleteEnrollment(@PathVariable Long id) {
-    enrollmentService.deleteEnrollment(id);
+  @DeleteMapping("/{enrollmentId}")
+  public ResponseEntity<Void> deleteEnrollment(@PathVariable Long enrollmentId) {
+    enrollmentService.deleteEnrollment(enrollmentId);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }

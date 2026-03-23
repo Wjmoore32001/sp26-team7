@@ -14,7 +14,6 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "students")
 @PrimaryKeyJoinColumn(name = "student_id")
 public class Student extends User {

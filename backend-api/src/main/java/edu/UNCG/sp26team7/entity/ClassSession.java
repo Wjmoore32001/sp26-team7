@@ -2,6 +2,8 @@ package edu.UNCG.sp26team7.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +25,6 @@ public class ClassSession {
 
   @ManyToOne
   @JoinColumn(name = "class_template_id", nullable = false)
+  @JsonIgnoreProperties({ "instructor", "title", "classType", "intensity", "createdAt", "updatedAt", "description" })
   private ClassTemplate classTemplate;
 }
