@@ -31,10 +31,10 @@ public class ClassTemplate {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long template_id;
+  private Long classTemplateId;
 
   @ManyToOne
-  @JoinColumn(name = "instructor_id")
+  @JoinColumn(name = "userId")
   private Instructor instructor;
 
   @Column
@@ -49,7 +49,7 @@ public class ClassTemplate {
   private IntensityLevels intensity;
 
   @Column
-  private int duration;
+  private Integer duration;
 
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;

@@ -6,6 +6,7 @@ public enum ClassType {
   YOGA,
   PILATES,
   CARDIO,
-  CROSSFIT
+  CROSSFIT,
+  CYCLING
 
 }

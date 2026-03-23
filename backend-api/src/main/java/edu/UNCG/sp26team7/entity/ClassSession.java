@@ -1,16 +1,30 @@
 package edu.UNCG.sp26team7.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ClassSessions")
+@Table(name = "class_sessions")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClassSession {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long session_id;
+  private Long classSessionId;
+
+  @Column(nullable = false)
+  private LocalDateTime scheduledAt;
+
+  @ManyToOne
+  @JoinColumn(name = "class_template_id", nullable = false)
+  @JsonIgnoreProperties({ "instructor", "title", "classType", "intensity", "createdAt", "updatedAt", "description" })
+  private ClassTemplate classTemplate;
 }
