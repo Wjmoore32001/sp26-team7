@@ -2,7 +2,6 @@ package edu.UNCG.sp26team7.entity;
 
 import jakarta.persistence.*;
 import edu.UNCG.sp26team7.entity.enums.BookingStatus;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
