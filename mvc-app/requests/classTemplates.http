@@ -1,0 +1,112 @@
+### Create ClassTemplate 1 for instructor 1
+
+POST http://localhost:8080/classTemplates HTTP/1.1
+Content-Type: application/json
+
+{
+  "classType": "YOGA",
+  "description": "Beginner yoga class",
+  "duration": 60,
+  "instructor": {
+    "userId": 1
+  },
+  "intensity": "MEDIUM",
+  "price": 19.99,
+  "title": "Intro Yoga"
+}
+
+
+### Create ClassTemplate 2 for instructor 1
+
+POST http://localhost:8080/classTemplates HTTP/1.1
+Content-Type: application/json
+
+{
+  "classType": "CARDIO",
+  "description": "Fast-paced cardio workout",
+  "duration": 45,
+  "instructor": {
+    "userId": 1
+  },
+  "intensity": "HIGH",
+  "price": 24.99,
+  "title": "Morning Burn"
+}
+
+
+### Create ClassTemplate 3 for instructor 2
+
+POST http://localhost:8080/classTemplates HTTP/1.1
+Content-Type: application/json
+
+{
+  "classType": "CYCLING",
+  "description": "Introductory cycling session",
+  "duration": 50,
+  "instructor": {
+    "userId": 2
+  },
+  "intensity": "MEDIUM",
+  "price": 22.50,
+  "title": "Spin Intro"
+}
+
+
+### Get all class templates
+
+GET http://localhost:8080/classTemplates HTTP/1.1
+
+
+### Get class template with templateId 1
+
+GET http://localhost:8080/classTemplates/1 HTTP/1.1
+
+
+### Get class template with templateId 2
+
+GET http://localhost:8080/classTemplates/2 HTTP/1.1
+
+
+### Get all templates for instructor 1
+
+GET http://localhost:8080/classTemplates/instructor/1 HTTP/1.1
+
+
+### Get all templates for instructor 2
+
+GET http://localhost:8080/classTemplates/instructor/2 HTTP/1.1
+
+
+### Update class template 2 description only
+
+PUT http://localhost:8080/classTemplates/2 HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "Updated cardio workout description"
+}
+
+
+### Verify class template 2 was updated
+
+GET http://localhost:8080/classTemplates/2 HTTP/1.1
+
+
+### Delete class template 3
+
+DELETE http://localhost:8080/classTemplates/3 HTTP/1.1
+
+
+### Verify class template 3 is gone
+
+GET http://localhost:8080/classTemplates/3 HTTP/1.1
+
+
+### Verify templates for instructor 2 after delete
+
+GET http://localhost:8080/classTemplates/instructor/2 HTTP/1.1
+
+
+### Verify all remaining class templates
+
+GET http://localhost:8080/classTemplates HTTP/1.1
