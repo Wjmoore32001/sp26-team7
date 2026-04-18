@@ -15,12 +15,11 @@
 
   // script is at: assets/js/include-nav.js
   // partials are at: assets/partials/*.html
-  const partialsDir = new URL("../partials/", scriptTag.src);
-  const partialUrl = new URL(filename, partialsDir);
+  const partialUrl = '/assets/partials/${filename}';
 
   const response = await fetch(partialUrl);
   if (!response.ok) {
-    console.error("Nav fetch failed:", response.status, partialUrl.toString());
+    console.error("Nav fetch failed:", response.status, partialUrl);
     return;
   }
 
