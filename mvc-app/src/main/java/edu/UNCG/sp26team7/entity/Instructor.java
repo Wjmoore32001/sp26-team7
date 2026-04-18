@@ -18,4 +18,7 @@ public class Instructor extends User {
   @Column(nullable = false)
   private String name;
 
+  @Column(length = 1000)
+  private String bio;
+
 }
