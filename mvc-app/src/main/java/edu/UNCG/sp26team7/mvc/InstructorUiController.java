@@ -33,6 +33,20 @@ public class InstructorUiController {
         return "instructor/profile";
     }
 
+    @GetMapping("/profile/edit")
+    public String editProfile(HttpSession session, Model model) {
+        Long instructorId = (Long) session.getAttribute("instructorId");
+
+        if (instructorId == null) {
+            return "redirect:/signin";
+        }
+
+        Instructor instructor = instructorService.getInstructorById(instructorId);
+        model.addAttribute("instructor", instructor);
+
+        return "instructor/edit-profile";
+    }
+
     @PostMapping("/profile")
     public String updateProfile(HttpSession session, @RequestParam String name, @RequestParam String email,
             @RequestParam(required = false) String password, @RequestParam(required = false) String bio) {
