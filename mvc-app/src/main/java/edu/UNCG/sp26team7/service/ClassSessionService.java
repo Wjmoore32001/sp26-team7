@@ -34,6 +34,10 @@ public class ClassSessionService {
     return classSessionRepository.findByClassTemplateClassTemplateId(classTemplateId);
   }
 
+  public List<ClassSession> getInstructorSessions(Long userId) {
+    return classSessionRepository.findByClassTemplate_Instructor_UserId(userId);
+  }
+
   public ClassSession createClassSession(ClassSession classSession) {
     if (classSession.getClassTemplate() == null ||
         classSession.getClassTemplate().getClassTemplateId() == null) {
