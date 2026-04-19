@@ -15,7 +15,7 @@
 
   // script is at: assets/js/include-nav.js
   // partials are at: assets/partials/*.html
-  const partialUrl = '/assets/partials/${filename}';
+  const partialUrl = `/assets/partials/${filename}`;
 
   const response = await fetch(partialUrl);
   if (!response.ok) {

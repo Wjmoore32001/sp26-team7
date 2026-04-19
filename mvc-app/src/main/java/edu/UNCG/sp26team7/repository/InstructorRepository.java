@@ -7,4 +7,5 @@ import edu.UNCG.sp26team7.entity.Instructor;
 
 @Repository
 public interface InstructorRepository extends JpaRepository<Instructor, Long> {
+    Instructor findByEmail(String email);
 }
