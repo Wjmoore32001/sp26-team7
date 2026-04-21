@@ -49,4 +49,13 @@ public class StudentService {
         return studentRepository.findByEmail(email);
     }
 
+    public Student authenticate(String email, String password) {
+    Student student = getStudentByEmail(email);
+    if (student != null && student.getPasswordHash().equals(password)) {
+      return student;
+    } else {
+      throw new RuntimeException("Invalid email or password");
+    }
+  }
+
 }

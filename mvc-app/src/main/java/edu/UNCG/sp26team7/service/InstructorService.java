@@ -65,12 +65,4 @@ public class InstructorService {
     return instructorRepository.findByEmail(email);
   }
 
-  public Instructor authenticate(String email, String password) {
-    Instructor instructor = getInstructorByEmail(email);
-    if (instructor != null && instructor.getPasswordHash().equals(password)) {
-      return instructor;
-    } else {
-      throw new RuntimeException("Invalid email or password");
-    }
-  }
 }

@@ -12,5 +12,4 @@ public interface ClassSessionRepository extends JpaRepository<ClassSession, Long
 
   List<ClassSession> findByClassTemplateClassTemplateId(Long classTemplateId);
 
-  List<ClassSession> findByClassTemplate_Instructor_UserId(Long userId);
 }

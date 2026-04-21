@@ -12,7 +12,7 @@
 
 <body>
     <div id="nav-placeholder"></div>
-    <script defer src="/assets/js/include-nav.js" data-nav="instructor"></script>
+    <script defer src="/assets/js/include-nav.js" data-nav="student"></script>
 
     <main class="container text-center">
 
@@ -26,16 +26,16 @@
             <div class="col-lg-8 text-start">
                 <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3">
 
-                    <form method="post" action="/instructor/profile">
+                    <form method="post" action="/student/profile">
 
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control" value="${instructor.name}" required>
+                            <input type="text" name="name" class="form-control" value="${student.name}" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" value="${instructor.email}" required>
+                            <input type="email" name="email" class="form-control" value="${student.email}" required>
                         </div>
 
                         <div class="mb-3">
@@ -44,14 +44,9 @@
                                 placeholder="Leave blank to keep current password">
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Bio</label>
-                            <textarea name="bio" class="form-control" rows="5">${instructor.bio}</textarea>
-                        </div>
-
                         <div class="row g-2 mt-4">
                             <div class="col-md-6">
-                                <a href="/instructor/profile" class="btn btn-outline-secondary w-100">
+                                <a href="/student/profile" class="btn btn-outline-secondary w-100">
                                     Cancel
                                 </a>
                             </div>

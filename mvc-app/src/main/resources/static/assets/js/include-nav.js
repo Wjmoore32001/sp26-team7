@@ -7,7 +7,7 @@
 
   const filenameMap = {
     root: "nav-root.html",
-    customer: "nav-customer.html",
+    student: "nav-student.html",
     instructor: "nav-instructor.html",
   };
 
