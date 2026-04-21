@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.UNCG.sp26team7.service.ClassSessionService;
 import edu.UNCG.sp26team7.service.StudentService;
 import edu.UNCG.sp26team7.entity.Student;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +19,9 @@ public class StudentUiController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private ClassSessionService classSessionService;
 
     @GetMapping("/profile")
     public String getProfile(HttpSession session, Model model) {
@@ -66,6 +70,12 @@ public class StudentUiController {
 
         studentService.updateStudent(studentId, studentDetails);
         return "redirect:/student/profile?success";
+    }
+
+    @GetMapping("/browse")
+    public String browseClasses(Model model) {
+        model.addAttribute("sessions", classSessionService.getAllClassSessions());
+        return "student/browse";
     }
 
     @GetMapping("/logout")
