@@ -109,7 +109,7 @@
                 <#list sessions as session>
                     <div class="row align-items-center border border-secondary-subtle rounded-3 mb-3">
                         <div class="col-md-3">
-                            <img src="../assets/images/placeholdergeneral.png" alt="Class Image Placeholder"
+                            <img src="/assets/images/placeholdergeneral.png" alt="Class Image Placeholder"
                                 class="img-fluid rounded-3 border border-secondary-subtle">
                         </div>
 
@@ -120,7 +120,7 @@
 
                             <div class="row small">
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span>
-                                    ${session.classTemplate.type}</div>
+                                    ${session.classTemplate.classType}</div>
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Time:</span>
                                     ${session.scheduledAt}</div>
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Price:</span>
@@ -129,9 +129,9 @@
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span>
                                     ${session.classTemplate.intensity}</div>
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span>
-                                    ${session.classTemplate.room}</div>
+                                    ?</div>
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Spots:</span>
-                                    ${session.classTemplate.capacity}</div>
+                                    ?</div>
                             </div>
                         </div>
                         <div class="col-md-2 text-md-end">
