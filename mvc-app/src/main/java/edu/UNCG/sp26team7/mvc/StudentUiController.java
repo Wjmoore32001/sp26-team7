@@ -78,6 +78,11 @@ public class StudentUiController {
         return "student/browse";
     }
 
+    @GetMapping("/home")
+    public String home() {
+        return "student/home";
+    }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
