@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="assets/css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+    <script defer src="assets/js/include-nav.js" data-nav="root"></script>
+
+    <div class="container text-center">
+        <div class="row mt-3">
+            <div class="col p-1 bg-body-tertiary border border-primary-subtle rounded-3">
+                <h1 class="text-light">Create Account</h1>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="p-3 bg-body-tertiary border border-primary-subtle rounded-3">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-start">
+
+                            <form method="post" action="/signup">
+                                <div class="mb-3">
+                                    <label for="accountType" class="form-label text-body-secondary">Account Type</label>
+                                    <select id="accountType" name="role"
+                                        class="form-select bg-body-tertiary border-secondary-subtle">
+                                        <option value="STUDENT">Student</option>
+                                        <option value="INSTRUCTOR">Instructor</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label text-body-secondary">Full Name</label>
+                                    <input id="fullName" name="name" type="text"
+                                        class="form-control bg-body-tertiary border-secondary-subtle"
+                                        placeholder="First Last" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label text-body-secondary">Email</label>
+                                    <input id="email" name="email" type="email"
+                                        class="form-control bg-body-tertiary border-secondary-subtle"
+                                        placeholder="name@example.com" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label text-body-secondary">Password</label>
+                                    <input id="password" name="password" type="password"
+                                        class="form-control bg-body-tertiary border-secondary-subtle"
+                                        placeholder="••••••••" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label text-body-secondary">Confirm
+                                        Password</label>
+                                    <input id="confirmPassword" name="confirmPassword" type="password"
+                                        class="form-control bg-body-tertiary border-secondary-subtle"
+                                        placeholder="••••••••" required>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Create Account</button>
+                                    <a class="btn btn-outline-primary" href="/signin">Back to Login</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
