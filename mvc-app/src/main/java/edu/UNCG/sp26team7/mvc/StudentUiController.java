@@ -86,6 +86,6 @@ public class StudentUiController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return "redirect:/signin";
     }
 }

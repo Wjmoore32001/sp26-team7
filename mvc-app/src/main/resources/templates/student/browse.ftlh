@@ -129,9 +129,7 @@
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span>
                                     ${session.classTemplate.intensity}</div>
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span>
-                                    ?</div>
-                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Spots:</span>
-                                    ?</div>
+                                    Studio B</div>
                             </div>
                         </div>
                         <div class="col-md-2 text-md-end">
