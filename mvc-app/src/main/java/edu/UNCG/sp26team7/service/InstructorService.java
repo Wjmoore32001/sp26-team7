@@ -47,8 +47,6 @@ public class InstructorService {
       existingInstructor.setPasswordHash(updatedInstructor.getPasswordHash());
     }
 
-    existingInstructor.setBio(updatedInstructor.getBio());
-
     return instructorRepository.save(existingInstructor);
   }
 
