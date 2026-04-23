@@ -1,0 +1,4 @@
+const CURRENT_USER_ID = 1;
+const CURRENT_INSTRUCTOR_ID = 1;
+const CURRENT_USER_EMAIL = "alice@uncg.edu";
+const CURRENT_USER_ROLE = "INSTRUCTOR";

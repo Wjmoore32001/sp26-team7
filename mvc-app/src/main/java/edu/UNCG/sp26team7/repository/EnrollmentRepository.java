@@ -4,18 +4,23 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import edu.UNCG.sp26team7.entity.Enrollment;
 
 @Repository
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
-
   List<Enrollment> findByClassSessionClassSessionId(Long classSessionId);
 
   List<Enrollment> findByStudentUserId(Long studentId);
 
   Optional<Enrollment> findByClassSessionClassSessionIdAndStudentUserId(Long classSessionId, Long studentId);
 
-  boolean existsByClassSessionClassSessionIdAndStudentUserId(long l, Long studentId);
+  boolean existsByClassSessionClassSessionIdAndStudentUserId(long classSessionId, Long studentId);
+
+  @Modifying
+  @Query("delete from Enrollment e where e.classSession.classSessionId = :classSessionId")
+  void deleteByClassSessionClassSessionId(Long classSessionId);
 }

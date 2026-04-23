@@ -1,0 +1,529 @@
+const classList = document.getElementById("class-list");
+const messageArea = document.getElementById("message-area");
+
+loadClassTemplates();
+
+function loadClassTemplates() {
+  messageArea.innerHTML = "";
+  classList.innerHTML = `
+        <div class="col-12">
+            <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 text-start">
+                Loading classes...
+            </div>
+        </div>
+    `;
+
+  fetch("/classTemplates/instructor/" + CURRENT_INSTRUCTOR_ID)
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load classes.");
+      }
+      return response.json();
+    })
+    .then(function (classes) {
+      displayClasses(classes);
+    })
+    .catch(function (error) {
+      classList.innerHTML = "";
+      messageArea.innerHTML = '<div class="alert alert-danger">Could not load classes.</div>';
+      console.log(error);
+    });
+}
+
+function displayClasses(classes) {
+  classList.innerHTML = "";
+
+  if (!classes || classes.length === 0) {
+    classList.innerHTML = `
+            <div class="col-12">
+                <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 text-start">
+                    <p class="mb-0">No classes found yet.</p>
+                </div>
+            </div>
+        `;
+    return;
+  }
+
+  classes.forEach(function (classTemplate) {
+    const col = document.createElement("div");
+    col.className = "col-12";
+
+    col.innerHTML = `
+            <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 text-start">
+                <h4 class="mb-3">${escapeHtml(classTemplate.title || "Untitled Class")}</h4>
+
+                <p class="mb-2"><strong>Type:</strong> ${formatText(classTemplate.classType)}</p>
+                <p class="mb-2"><strong>Duration:</strong> ${classTemplate.duration || 0} min</p>
+                <p class="mb-2"><strong>Intensity:</strong> ${formatText(classTemplate.intensity)}</p>
+                <p class="mb-2"><strong>Price:</strong> $${formatPrice(classTemplate.price)}</p>
+                <p class="mb-3"><strong>Description:</strong> ${escapeHtml(classTemplate.description || "No description.")}</p>
+
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <button class="btn btn-primary publish-toggle-button" data-id="${classTemplate.classTemplateId}">
+                        Publish
+                    </button>
+                    <button class="btn btn-outline-secondary edit-toggle-button" data-id="${classTemplate.classTemplateId}">
+                        Edit
+                    </button>
+                </div>
+
+                <div id="publish-form-${classTemplate.classTemplateId}" class="publish-form-area d-none border-top pt-3 mt-3">
+                    <h5 class="mb-3">Publish Class Session</h5>
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label" for="scheduledAt-${classTemplate.classTemplateId}">Date and Time</label>
+                            <input type="datetime-local" class="form-control" id="scheduledAt-${classTemplate.classTemplateId}">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button class="btn btn-success publish-save-button" data-id="${classTemplate.classTemplateId}">
+                                Save Publish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="edit-form-${classTemplate.classTemplateId}" class="edit-form-area d-none border-top pt-3 mt-3">
+                    <h5 class="mb-3">Edit Class Template</h5>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="edit-title-${classTemplate.classTemplateId}">Title</label>
+                        <input type="text" class="form-control" id="edit-title-${classTemplate.classTemplateId}" value="${escapeAttribute(classTemplate.title || "")}">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="edit-classType-${classTemplate.classTemplateId}">Class Type</label>
+                        <select class="form-select" id="edit-classType-${classTemplate.classTemplateId}">
+                            ${buildClassTypeOptions(classTemplate.classType)}
+                        </select>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="edit-duration-${classTemplate.classTemplateId}">Duration</label>
+                        <input type="number" class="form-control" id="edit-duration-${classTemplate.classTemplateId}" value="${classTemplate.duration || 0}">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="edit-price-${classTemplate.classTemplateId}">Price</label>
+                        <input type="number" step="0.01" class="form-control" id="edit-price-${classTemplate.classTemplateId}" value="${classTemplate.price || 0}">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="edit-intensity-${classTemplate.classTemplateId}">Intensity</label>
+                        <select class="form-select" id="edit-intensity-${classTemplate.classTemplateId}">
+                            ${buildIntensityOptions(classTemplate.intensity)}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="edit-description-${classTemplate.classTemplateId}">Description</label>
+                        <textarea class="form-control" rows="3" id="edit-description-${classTemplate.classTemplateId}">${escapeHtml(classTemplate.description || "")}</textarea>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-warning edit-save-button" data-id="${classTemplate.classTemplateId}">
+                            Save Edit
+                        </button>
+                        <button class="btn btn-danger delete-button" data-id="${classTemplate.classTemplateId}">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+
+                <div id="sessions-${classTemplate.classTemplateId}" class="border-top pt-3 mt-3">
+                    <h5 class="mb-3">Published Sessions</h5>
+                    <div class="session-list">Loading sessions...</div>
+                </div>
+            </div>
+        `;
+
+    classList.appendChild(col);
+    loadSessionsForTemplate(classTemplate.classTemplateId);
+  });
+
+  addButtonListeners();
+}
+
+function addButtonListeners() {
+  document.querySelectorAll(".publish-toggle-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const id = button.dataset.id;
+      const formArea = document.getElementById("publish-form-" + id);
+      formArea.classList.toggle("d-none");
+    });
+  });
+
+  document.querySelectorAll(".edit-toggle-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const id = button.dataset.id;
+      const formArea = document.getElementById("edit-form-" + id);
+      formArea.classList.toggle("d-none");
+    });
+  });
+
+  document.querySelectorAll(".publish-save-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.id;
+      publishClassSession(templateId);
+    });
+  });
+
+  document.querySelectorAll(".edit-save-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.id;
+      saveClassTemplateEdit(templateId);
+    });
+  });
+
+  document.querySelectorAll(".delete-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.id;
+      deleteClassTemplate(templateId);
+    });
+  });
+}
+
+function saveClassTemplateEdit(templateId) {
+  const updatedTemplate = {
+    instructor: {
+      userId: CURRENT_INSTRUCTOR_ID
+    },
+    title: document.getElementById("edit-title-" + templateId).value,
+    classType: document.getElementById("edit-classType-" + templateId).value,
+    intensity: document.getElementById("edit-intensity-" + templateId).value,
+    duration: parseInt(document.getElementById("edit-duration-" + templateId).value),
+    price: parseFloat(document.getElementById("edit-price-" + templateId).value),
+    description: document.getElementById("edit-description-" + templateId).value
+  };
+
+  fetch("/classTemplates/" + templateId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedTemplate)
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not update class.");
+      }
+      return response.json();
+    })
+    .then(function () {
+      showMessage("Class updated successfully.", "success");
+      loadClassTemplates();
+    })
+    .catch(function (error) {
+      showMessage("Could not update class.", "danger");
+      console.log(error);
+    });
+}
+
+function publishClassSession(templateId) {
+  const scheduledAtInput = document.getElementById("scheduledAt-" + templateId);
+  const scheduledAt = scheduledAtInput.value;
+
+  if (!scheduledAt) {
+    showMessage("Please choose a date and time before publishing.", "danger");
+    return;
+  }
+
+  const classSession = {
+    scheduledAt: scheduledAt,
+    classTemplate: {
+      classTemplateId: parseInt(templateId)
+    }
+  };
+
+  fetch("/classSessions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(classSession)
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not publish class session.");
+      }
+      return response.json();
+    })
+    .then(function () {
+      showMessage("Class session published successfully.", "success");
+      document.getElementById("publish-form-" + templateId).classList.add("d-none");
+      scheduledAtInput.value = "";
+      loadSessionsForTemplate(templateId);
+    })
+    .catch(function (error) {
+      showMessage("Could not publish class session.", "danger");
+      console.log(error);
+    });
+}
+
+function loadSessionsForTemplate(templateId) {
+  fetch("/classSessions/classTemplate/" + templateId)
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load sessions.");
+      }
+      return response.json();
+    })
+    .then(function (sessions) {
+      displaySessions(templateId, sessions);
+    })
+    .catch(function (error) {
+      const sessionsContainer = document.querySelector("#sessions-" + templateId + " .session-list");
+      sessionsContainer.innerHTML = '<p class="mb-0">Could not load sessions.</p>';
+      console.log(error);
+    });
+}
+
+function displaySessions(templateId, sessions) {
+  const sessionsContainer = document.querySelector("#sessions-" + templateId + " .session-list");
+
+  if (!sessions || sessions.length === 0) {
+    sessionsContainer.innerHTML = '<p class="mb-0">No sessions published yet.</p>';
+    return;
+  }
+
+  let html = "";
+
+  sessions.forEach(function (session) {
+    const sessionId = session.classSessionId;
+    const formattedDate = formatDateTime(session.scheduledAt);
+    const inputValue = formatForDateTimeInput(session.scheduledAt);
+
+    html += `
+            <div class="border rounded-3 p-3 mb-2">
+                <p class="mb-2"><strong>Scheduled At:</strong> ${formattedDate}</p>
+
+                <div class="d-flex flex-wrap gap-2 mb-2">
+                    <button class="btn btn-outline-secondary session-edit-toggle-button" data-template-id="${templateId}" data-session-id="${sessionId}">
+                        Reschedule
+                    </button>
+                    <button class="btn btn-outline-danger session-delete-button" data-template-id="${templateId}" data-session-id="${sessionId}">
+                        Cancel
+                    </button>
+                </div>
+
+                <div id="session-edit-form-${sessionId}" class="d-none border-top pt-3 mt-3">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label class="form-label" for="session-scheduledAt-${sessionId}">New Date and Time</label>
+                            <input type="datetime-local" class="form-control" id="session-scheduledAt-${sessionId}" value="${inputValue}">
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button class="btn btn-success session-save-button" data-template-id="${templateId}" data-session-id="${sessionId}">
+                                Save Reschedule
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+  });
+
+  sessionsContainer.innerHTML = html;
+  addSessionButtonListeners();
+}
+
+function addSessionButtonListeners() {
+  document.querySelectorAll(".session-edit-toggle-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const sessionId = button.dataset.sessionId;
+      const formArea = document.getElementById("session-edit-form-" + sessionId);
+      formArea.classList.toggle("d-none");
+    });
+  });
+
+  document.querySelectorAll(".session-save-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.templateId;
+      const sessionId = button.dataset.sessionId;
+      saveSessionEdit(templateId, sessionId);
+    });
+  });
+
+  document.querySelectorAll(".session-delete-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.templateId;
+      const sessionId = button.dataset.sessionId;
+      deleteSession(templateId, sessionId);
+    });
+  });
+}
+
+function saveSessionEdit(templateId, sessionId) {
+  const scheduledAt = document.getElementById("session-scheduledAt-" + sessionId).value;
+
+  if (!scheduledAt) {
+    showMessage("Please choose a new date and time.", "danger");
+    return;
+  }
+
+  const updatedSession = {
+    scheduledAt: scheduledAt,
+    classTemplate: {
+      classTemplateId: parseInt(templateId)
+    }
+  };
+
+  fetch("/classSessions/" + sessionId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedSession)
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not reschedule class session.");
+      }
+      return response.json();
+    })
+    .then(function () {
+      showMessage("Class session rescheduled successfully.", "success");
+      loadSessionsForTemplate(templateId);
+    })
+    .catch(function (error) {
+      showMessage("Could not reschedule class session.", "danger");
+      console.log(error);
+    });
+}
+
+function deleteSession(templateId, sessionId) {
+  const confirmed = window.confirm("Are you sure you want to cancel this class session?");
+
+  if (!confirmed) {
+    return;
+  }
+
+  fetch("/classSessions/" + sessionId, {
+    method: "DELETE"
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not cancel class session.");
+      }
+    })
+    .then(function () {
+      showMessage("Class session cancelled successfully.", "success");
+      loadSessionsForTemplate(templateId);
+    })
+    .catch(function (error) {
+      showMessage("Could not cancel class session.", "danger");
+      console.log(error);
+    });
+}
+
+function deleteClassTemplate(templateId) {
+  const confirmed = window.confirm("Are you sure you want to delete this class template?");
+
+  if (!confirmed) {
+    return;
+  }
+
+  fetch("/classTemplates/" + templateId, {
+    method: "DELETE"
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not delete class.");
+      }
+    })
+    .then(function () {
+      showMessage("Class deleted successfully.", "success");
+      loadClassTemplates();
+    })
+    .catch(function (error) {
+      showMessage("Could not delete class.", "danger");
+      console.log(error);
+    });
+}
+
+function buildClassTypeOptions(selectedValue) {
+  const options = ["CARDIO", "CYCLING", "CROSSFIT", "PILATES", "WEIGHTLIFTING", "YOGA", "ZUMBA"];
+  let html = "";
+
+  options.forEach(function (option) {
+    const selected = option === selectedValue ? "selected" : "";
+    html += `<option value="${option}" ${selected}>${formatText(option)}</option>`;
+  });
+
+  return html;
+}
+
+function buildIntensityOptions(selectedValue) {
+  const options = ["HIGH", "MEDIUM_HIGH", "MEDIUM", "MEDIUM_LOW", "LOW"];
+  let html = "";
+
+  options.forEach(function (option) {
+    const selected = option === selectedValue ? "selected" : "";
+    html += `<option value="${option}" ${selected}>${formatText(option)}</option>`;
+  });
+
+  return html;
+}
+
+function showMessage(message, type) {
+  messageArea.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+}
+
+function formatText(value) {
+  if (!value) {
+    return "";
+  }
+
+  return value
+    .toLowerCase()
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, function (letter) {
+      return letter.toUpperCase();
+    });
+}
+
+function formatPrice(price) {
+  if (price === null || price === undefined || price === "") {
+    return "0.00";
+  }
+
+  return Number(price).toFixed(2);
+}
+
+function formatDateTime(value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+  return date.toLocaleString();
+}
+
+function formatForDateTimeInput(value) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function escapeAttribute(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
