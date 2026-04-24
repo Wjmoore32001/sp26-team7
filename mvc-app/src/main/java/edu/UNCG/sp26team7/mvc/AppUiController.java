@@ -50,6 +50,7 @@ public class AppUiController {
             student.setName(name);
             student.setEmail(email);
             student.setPasswordHash(password);
+            student.setRole(UserRole.STUDENT);
 
             studentService.createStudent(student);
             return "redirect:/signin";
