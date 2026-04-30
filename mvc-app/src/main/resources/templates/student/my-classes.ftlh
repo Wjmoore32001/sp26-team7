@@ -41,7 +41,7 @@
                 <#list schedules as schedule>
                     <div class="row align-items-center border border-secondary-subtle rounded-3 p-2 mb-3">
                         <div class="col-md-7">
-                            <a class="text-decoration-none" href="/student/class-details">
+                            <a class="text-decoration-none" href="/student/classes/${schedule.classSession.classTemplate.classTemplateId}">
                                 <h5 class="mb-1">${schedule.classSession.classTemplate.title}</h5>
                             </a>
                             <div class="small text-body-secondary mb-2">Instructor:

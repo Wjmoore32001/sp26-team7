@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.UNCG.sp26team7.service.ClassSessionService;
+import edu.UNCG.sp26team7.service.ClassTemplateService;
+import edu.UNCG.sp26team7.service.ReviewService;
 import edu.UNCG.sp26team7.service.StudentScheduleService;
 import edu.UNCG.sp26team7.service.StudentService;
 import edu.UNCG.sp26team7.entity.ClassSession;
+import edu.UNCG.sp26team7.entity.ClassTemplate;
+import edu.UNCG.sp26team7.entity.Review;
 import edu.UNCG.sp26team7.entity.Student;
 import edu.UNCG.sp26team7.entity.StudentSchedule;
 import edu.UNCG.sp26team7.entity.enums.BookingStatus;
@@ -29,6 +34,12 @@ public class StudentUiController {
 
     @Autowired
     private ClassSessionService classSessionService;
+
+    @Autowired
+    private ClassTemplateService classTemplateService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @Autowired
     private StudentScheduleService studentScheduleService;
@@ -127,6 +138,49 @@ public class StudentUiController {
         List<StudentSchedule> schedules = studentScheduleService.getSchedulesForStudent(studentId);
         model.addAttribute("schedules", schedules);
         return "student/my-classes";
+    }
+
+    @GetMapping("/classes/{id}")
+    public String classDetails(@PathVariable("id") Long templateId, Model model, HttpSession session) {
+        Long studentId = (Long) session.getAttribute("studentId");
+
+        if (studentId == null) {
+            return "redirect:/signin";
+        }
+
+        ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
+        List<Review> reviews = reviewService.getReviewsByClassTemplateId(templateId);
+
+        model.addAttribute("template", template);
+        model.addAttribute("reviews", reviews);
+        return "student/class-details";
+    }
+
+    @GetMapping("/classes/{id}/reviews/new")
+    public String newReview(@PathVariable("id") Long templateId, Model model) {
+        model.addAttribute("templateId", templateId);
+        return "student/leave-review";
+    }
+
+    @PostMapping("/classes/{id}/reviews")
+    public String submitReview(@PathVariable("id") Long templateId, @RequestParam Integer rating, @RequestParam String comment, HttpSession session) {
+        Long studentId = (Long) session.getAttribute("studentId");
+
+        if (studentId == null) {
+            return "redirect:/signin";
+        }
+
+        Student student = studentService.getStudentById(studentId).orElse(null);
+        ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
+
+        Review review = new Review();
+        review.setStudent(student);
+        review.setClassTemplate(template);
+        review.setRating(rating);
+        review.setComment(comment);
+
+        reviewService.createReview(review);
+        return "redirect:/student/classes/" + templateId;
     }
 
     @GetMapping("/logout")
