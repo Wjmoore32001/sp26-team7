@@ -1,6 +1,7 @@
 package edu.UNCG.sp26team7.mvc;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -113,6 +114,19 @@ public class StudentUiController {
 
         studentScheduleService.createStudentSchedule(schedule);
         return "redirect:/student/browse?joined";
+    }
+
+    @GetMapping("/my-classes")
+    public String myClasses(HttpSession session, Model model) {
+        Long studentId = (Long) session.getAttribute("studentId");
+
+        if (studentId == null) {
+            return "redirect:/signin";
+        }
+
+        List<StudentSchedule> schedules = studentScheduleService.getSchedulesForStudent(studentId);
+        model.addAttribute("schedules", schedules);
+        return "student/my-classes";
     }
 
     @GetMapping("/logout")
