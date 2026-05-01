@@ -21,7 +21,7 @@
                 <h1 class="display-5 mb-2">Gym Class Hub</h1>
                 <div class="row mt-3">
                     <div class="col-md-6 mb-2 mb-md-0">
-                        <a class="btn btn-primary w-100" href="/student/dashboard">Dashboard</a>
+                        <a class="btn btn-primary w-100" href="/student/browse">Browse</a>
                     </div>
                 </div>
             </div>

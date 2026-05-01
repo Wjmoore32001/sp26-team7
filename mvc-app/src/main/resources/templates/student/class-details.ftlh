@@ -60,6 +60,17 @@
                                         <div class="small text-body-secondary">${review.rating}/5</div>
                                     </div>
                                     <div>${review.comment}</div>
+
+                                    <#if review.replyText??>
+                                        <div class="mt-2 p-2 border border-secondary-subtle rounded-3 bg-body-tertiary">
+                                            <div class="small fw-semibold text-body-secondary mb-1">
+                                                Instructor Reply
+                                            </div>
+                                            <div class="small">
+                                                ${review.replyText}
+                                            </div>
+                                        </div>
+                                    </#if>
                                 </div>
                             </#list>
                         </div>

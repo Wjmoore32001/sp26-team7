@@ -157,8 +157,15 @@ public class StudentUiController {
     }
 
     @GetMapping("/classes/{id}/reviews/new")
-    public String newReview(@PathVariable("id") Long templateId, Model model) {
-        model.addAttribute("templateId", templateId);
+    public String newReview(@PathVariable("id") Long templateId, Model model, HttpSession session) {
+        Long studentId = (Long) session.getAttribute("studentId");
+
+        if (studentId == null) {
+            return "redirect:/signin";
+        }
+        
+        ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
+        model.addAttribute("template", template);
         return "student/leave-review";
     }
 
