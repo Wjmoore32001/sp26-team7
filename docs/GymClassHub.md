@@ -2,7 +2,7 @@
 # Requirements
 
 **Project Name:** Gym Class Hub \
-**Team:** William Moore - Customer; Chloe Rhodes - Instructor \
+**Team:** Chloe Rhodes - Customer; William Moore - Instructor \
 **Course:** CSC 340-02\
 **Version:** 1.0\
 **Date:** 2026-01-30
