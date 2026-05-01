@@ -41,7 +41,8 @@
                 <#list schedules as schedule>
                     <div class="row align-items-center border border-secondary-subtle rounded-3 p-2 mb-3">
                         <div class="col-md-7">
-                            <a class="text-decoration-none" href="/student/classes/${schedule.classSession.classTemplate.classTemplateId}">
+                            <a class="text-decoration-none"
+                                href="/student/classes/${schedule.classSession.classTemplate.classTemplateId}">
                                 <h5 class="mb-1">${schedule.classSession.classTemplate.title}</h5>
                             </a>
                             <div class="small text-body-secondary mb-2">Instructor:
@@ -58,6 +59,14 @@
                                 <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span>
                                     ${schedule.classSession.classTemplate.intensity}</div>
                             </div>
+                        </div>
+                        <div class="col-md-2 text-md-end">
+                            <form method="post" action="/student/cancel">
+                                <input type="hidden" name="scheduleId" value="${schedule.studentScheduleId}">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Cancel
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </#list>

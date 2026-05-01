@@ -127,6 +127,18 @@ public class StudentUiController {
         return "redirect:/student/browse?joined";
     }
 
+    @PostMapping("/cancel")
+    public String cancelClass(@RequestParam Long scheduleId, HttpSession session) {
+        Long studentId = (Long) session.getAttribute("studentId");
+
+        if (studentId == null) {
+            return "redirect:/signin";
+        }
+
+        studentScheduleService.deleteStudentSchedule(scheduleId);
+        return "redirect:/student/my-classes?cancelled";
+    }
+
     @GetMapping("/my-classes")
     public String myClasses(HttpSession session, Model model) {
         Long studentId = (Long) session.getAttribute("studentId");
