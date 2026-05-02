@@ -8,18 +8,25 @@ import edu.UNCG.sp26team7.entity.ClassSession;
 import edu.UNCG.sp26team7.entity.ClassTemplate;
 import edu.UNCG.sp26team7.repository.ClassSessionRepository;
 import edu.UNCG.sp26team7.repository.ClassTemplateRepository;
+import edu.UNCG.sp26team7.repository.EnrollmentRepository;
+import edu.UNCG.sp26team7.repository.StudentScheduleRepository;
 
 @Service
 public class ClassSessionService {
 
   private final ClassSessionRepository classSessionRepository;
   private final ClassTemplateRepository classTemplateRepository;
+  private final EnrollmentRepository enrollmentRepository;
+  private final StudentScheduleRepository studentScheduleRepository;
 
-  public ClassSessionService(
-      ClassSessionRepository classSessionRepository,
-      ClassTemplateRepository classTemplateRepository) {
+  public ClassSessionService(ClassSessionRepository classSessionRepository,
+      ClassTemplateRepository classTemplateRepository,
+      EnrollmentRepository enrollmentRepository,
+      StudentScheduleRepository studentScheduleRepository) {
     this.classSessionRepository = classSessionRepository;
     this.classTemplateRepository = classTemplateRepository;
+    this.enrollmentRepository = enrollmentRepository;
+    this.studentScheduleRepository = studentScheduleRepository;
   }
 
   public List<ClassSession> getAllClassSessions() {
@@ -35,8 +42,7 @@ public class ClassSessionService {
   }
 
   public ClassSession createClassSession(ClassSession classSession) {
-    if (classSession.getClassTemplate() == null ||
-        classSession.getClassTemplate().getClassTemplateId() == null) {
+    if (classSession.getClassTemplate() == null || classSession.getClassTemplate().getClassTemplateId() == null) {
       return null;
     }
 
@@ -63,9 +69,8 @@ public class ClassSessionService {
       existingSession.setScheduledAt(updatedClassSession.getScheduledAt());
     }
 
-    if (updatedClassSession.getClassTemplate() != null &&
-        updatedClassSession.getClassTemplate().getClassTemplateId() != null) {
-
+    if (updatedClassSession.getClassTemplate() != null
+        && updatedClassSession.getClassTemplate().getClassTemplateId() != null) {
       ClassTemplate realTemplate = classTemplateRepository
           .findById(updatedClassSession.getClassTemplate().getClassTemplateId())
           .orElse(null);
@@ -83,7 +88,10 @@ public class ClassSessionService {
       return false;
     }
 
+    enrollmentRepository.deleteByClassSessionClassSessionId(classSessionId);
+    studentScheduleRepository.deleteByClassSessionClassSessionId(classSessionId);
     classSessionRepository.deleteById(classSessionId);
+
     return true;
   }
 }
