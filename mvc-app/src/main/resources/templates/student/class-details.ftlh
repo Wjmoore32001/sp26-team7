@@ -2,88 +2,120 @@
 <html lang="en" data-bs-theme="dark">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Class Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link href="/assets/css/theme.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Class Details</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <link href="/assets/css/theme.css" rel="stylesheet">
 </head>
 
 <body>
-    <div id="nav-placeholder"></div>
-    <script defer src="/assets/js/include-nav.js" data-nav="student"></script>
+  <nav class="navbar navbar-expand bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">GCH</a>
 
-    <div class="container text-center">
-        <div class="row mt-3">
-            <div class="col p-1 bg-body-tertiary border border-primary-subtle rounded-3">
-                <h1>Class Details</h1>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col text-start">
-                <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3">
-                    <div class="row g-3 p-2 border border-secondary-subtle rounded-3 mb-3">
-                        <div class="col-lg-8">
-                            <h3 class="mb-1">${template.title}</h3>
-                            <div class="text-body-secondary mb-2">${template.description}</div>
-                            <div class="row small mb-2">
-                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Type:</span>
-                                    ${template.classType}</div>
-                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Price:</span>
-                                    $${template.price}</div>
+      <div class="collapse navbar-collapse show">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/student/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/student/my-classes">My Classes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/student/browse">Browse</a>
+          </li>
+        </ul>
 
-                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Intensity:</span>
-                                    ${template.intensity}</div>
-                                <div class="col-6 col-lg-4"><span class="text-body-secondary">Room:</span> Studio A
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="p-2 border border-secondary-subtle rounded-3 h-100 text-center">
-                                <div class="fw-semibold">${template.instructor.name}</div>
-                                <div class="small text-body-secondary">Instructor</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-3 p-2 border border-secondary-subtle rounded-3">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0">Reviews</h4>
-                            <a class="btn btn-outline-primary"
-                                href="/student/classes/${template.classTemplateId}/reviews/new">Leave a Review</a>
-                        </div>
-                        <div class="col">
-                            <#list reviews as review>
-                                <div class="p-2 border border-secondary-subtle rounded-3 mb-3">
-                                    <div class="d-flex justify-content-between">
-                                        <div class="fw-semibold">${review.student.name}</div>
-                                        <div class="small text-body-secondary">${review.rating}/5</div>
-                                    </div>
-                                    <div>${review.comment}</div>
-
-                                    <#if review.replyText??>
-                                        <div class="mt-2 p-2 border border-secondary-subtle rounded-3 bg-body-tertiary">
-                                            <div class="small fw-semibold text-body-secondary mb-1">
-                                                Instructor Reply
-                                            </div>
-                                            <div class="small">
-                                                ${review.replyText}
-                                            </div>
-                                        </div>
-                                    </#if>
-                                </div>
-                            </#list>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/student/profile">Profile</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+  </nav>
+
+  <div class="container text-center">
+    <div class="row mt-3">
+      <div class="col p-1 bg-body-tertiary border border-primary-subtle rounded-3">
+        <h1 class="text-light">${template.title!"Class Details"}</h1>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-lg-10 mx-auto text-start">
+        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 mb-3">
+          <h3 class="mb-3">Class Information</h3>
+          <p class="mb-2"><strong>Instructor:</strong> ${template.instructor.name!""}</p>
+          <p class="mb-2"><strong>Type:</strong> ${template.classType!""}</p>
+          <p class="mb-2"><strong>Intensity:</strong> ${template.intensity!""}</p>
+          <p class="mb-2"><strong>Duration:</strong> ${template.duration!0} min</p>
+          <p class="mb-2"><strong>Price:</strong> $${template.price!0}</p>
+          <p class="mb-0"><strong>Description:</strong> ${template.description!"No description."}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-lg-10 mx-auto text-start">
+        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 mb-3">
+          <h3 class="mb-3">Available Sessions</h3>
+
+          <#if sessions?? && sessions?size gt 0>
+            <#list sessions as session>
+              <div class="border rounded-3 p-3 mb-3">
+                <p class="mb-2"><strong>Scheduled At:</strong> ${session.scheduledAt!""}</p>
+
+                <form method="post" action="/student/enroll" class="mb-0">
+                  <input type="hidden" name="classSessionId" value="${session.classSessionId}">
+                  <button type="submit" class="btn btn-primary">Join Session</button>
+                </form>
+              </div>
+            </#list>
+            <#else>
+              <div class="border rounded-3 p-3">
+                <p class="mb-0">No sessions are available for this class right now.</p>
+              </div>
+          </#if>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2 mb-4">
+      <div class="col-lg-10 mx-auto text-start">
+        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+            <h3 class="mb-0">Reviews</h3>
+            <a href="/student/classes/${template.classTemplateId}/reviews/new" class="btn btn-outline-secondary">
+              Leave Review
+            </a>
+          </div>
+
+          <#if reviews?? && reviews?size gt 0>
+            <#list reviews as review>
+              <div class="border rounded-3 p-3 mb-3">
+                <p class="mb-2"><strong>Student:</strong> ${review.student.name!""}</p>
+                <p class="mb-2"><strong>Rating:</strong> ${review.rating!0}/5</p>
+                <p class="mb-0"><strong>Comment:</strong> ${review.comment!""}</p>
+              </div>
+            </#list>
+            <#else>
+              <div class="border rounded-3 p-3">
+                <p class="mb-0">No reviews yet.</p>
+              </div>
+          </#if>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
