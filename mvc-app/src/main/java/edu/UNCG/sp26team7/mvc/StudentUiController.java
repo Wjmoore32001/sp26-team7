@@ -29,182 +29,191 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/student")
 public class StudentUiController {
 
-    @Autowired
-    private StudentService studentService;
+  @Autowired
+  private StudentService studentService;
 
-    @Autowired
-    private ClassSessionService classSessionService;
+  @Autowired
+  private ClassSessionService classSessionService;
 
-    @Autowired
-    private ClassTemplateService classTemplateService;
+  @Autowired
+  private ClassTemplateService classTemplateService;
 
-    @Autowired
-    private ReviewService reviewService;
+  @Autowired
+  private ReviewService reviewService;
 
-    @Autowired
-    private StudentScheduleService studentScheduleService;
+  @Autowired
+  private StudentScheduleService studentScheduleService;
 
-    @GetMapping("/profile")
-    public String getProfile(HttpSession session, Model model) {
-        Long studentId = (Long) session.getAttribute("studentId");
+  @GetMapping("/profile")
+  public String getProfile(HttpSession session, Model model) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
-
-        Student student = studentService.getStudentById(studentId).orElse(null);
-
-        model.addAttribute("student", student);
-        return "student/profile";
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @GetMapping("/profile/edit")
-    public String editProfile(HttpSession session, Model model) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    Student student = studentService.getStudentById(studentId).orElse(null);
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+    model.addAttribute("student", student);
+    return "student/profile";
+  }
 
-        Student student = studentService.getStudentById(studentId).orElse(null);
+  @GetMapping("/profile/edit")
+  public String editProfile(HttpSession session, Model model) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        model.addAttribute("student", student);
-        return "student/edit-profile";
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @PostMapping("/profile")
-    public String updateProfile(HttpSession session, @RequestParam String name, @RequestParam String email,
-            @RequestParam(required = false) String password) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    Student student = studentService.getStudentById(studentId).orElse(null);
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+    model.addAttribute("student", student);
+    return "student/edit-profile";
+  }
 
-        Student studentDetails = new Student();
-        studentDetails.setName(name);
-        studentDetails.setEmail(email);
+  @PostMapping("/profile")
+  public String updateProfile(HttpSession session, @RequestParam String name, @RequestParam String email,
+      @RequestParam(required = false) String password) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        if (password != null && !password.isEmpty()) {
-            studentDetails.setPasswordHash(password);
-        }
-
-        studentService.updateStudent(studentId, studentDetails);
-        return "redirect:/student/profile?success";
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @GetMapping("/browse")
-    public String browseClasses(Model model) {
-        model.addAttribute("sessions", classSessionService.getAllClassSessions());
-        return "student/browse";
+    Student studentDetails = new Student();
+    studentDetails.setName(name);
+    studentDetails.setEmail(email);
+
+    if (password != null && !password.isEmpty()) {
+      studentDetails.setPasswordHash(password);
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "student/home";
+    studentService.updateStudent(studentId, studentDetails);
+    return "redirect:/student/profile?success";
+  }
+
+  @GetMapping("/browse")
+  public String browseClasses(HttpSession session, Model model) {
+    Long studentId = (Long) session.getAttribute("studentId");
+
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @PostMapping("/enroll")
-    public String enroll(@RequestParam Long classSessionId, HttpSession session) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    model.addAttribute("templates", classTemplateService.getPublishedTemplates());
+    return "student/browse";
+  }
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+  @GetMapping("/home")
+  public String home() {
+    return "student/home";
+  }
 
-        StudentSchedule schedule = new StudentSchedule();
-        Student student = new Student();
-        student.setUserId(studentId);
-        ClassSession classSession = new ClassSession();
-        classSession.setClassSessionId(classSessionId);
+  @PostMapping("/enroll")
+  public String enroll(@RequestParam Long classSessionId, HttpSession session) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        schedule.setStudent(student);
-        schedule.setClassSession(classSession);
-        schedule.setEnrolledAt(LocalDateTime.now());
-        schedule.setBookingStatus(BookingStatus.ENROLLED);
-
-        studentScheduleService.createStudentSchedule(schedule);
-        return "redirect:/student/browse?joined";
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @PostMapping("/cancel")
-    public String cancelClass(@RequestParam Long scheduleId, HttpSession session) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    StudentSchedule schedule = new StudentSchedule();
+    Student student = new Student();
+    student.setUserId(studentId);
+    ClassSession classSession = new ClassSession();
+    classSession.setClassSessionId(classSessionId);
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+    schedule.setStudent(student);
+    schedule.setClassSession(classSession);
+    schedule.setEnrolledAt(LocalDateTime.now());
+    schedule.setBookingStatus(BookingStatus.ENROLLED);
 
-        studentScheduleService.deleteStudentSchedule(scheduleId);
-        return "redirect:/student/my-classes?cancelled";
+    studentScheduleService.createStudentSchedule(schedule);
+    return "redirect:/student/browse?joined";
+  }
+
+  @PostMapping("/cancel")
+  public String cancelClass(@RequestParam Long scheduleId, HttpSession session) {
+    Long studentId = (Long) session.getAttribute("studentId");
+
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @GetMapping("/my-classes")
-    public String myClasses(HttpSession session, Model model) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    studentScheduleService.deleteStudentSchedule(scheduleId);
+    return "redirect:/student/my-classes?cancelled";
+  }
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+  @GetMapping("/my-classes")
+  public String myClasses(HttpSession session, Model model) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        List<StudentSchedule> schedules = studentScheduleService.getSchedulesForStudent(studentId);
-        model.addAttribute("schedules", schedules);
-        return "student/my-classes";
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @GetMapping("/classes/{id}")
-    public String classDetails(@PathVariable("id") Long templateId, Model model, HttpSession session) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    List<StudentSchedule> schedules = studentScheduleService.getSchedulesForStudent(studentId);
+    model.addAttribute("schedules", schedules);
+    return "student/my-classes";
+  }
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+  @GetMapping("/classes/{id}")
+  public String classDetails(@PathVariable("id") Long templateId, Model model, HttpSession session) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
-        List<Review> reviews = reviewService.getReviewsByClassTemplateId(templateId);
-
-        model.addAttribute("template", template);
-        model.addAttribute("reviews", reviews);
-        return "student/class-details";
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @GetMapping("/classes/{id}/reviews/new")
-    public String newReview(@PathVariable("id") Long templateId, Model model, HttpSession session) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
+    List<Review> reviews = reviewService.getReviewsByClassTemplateId(templateId);
+    List<ClassSession> sessions = classSessionService.getSessionsByClassTemplateId(templateId);
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
-        
-        ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
-        model.addAttribute("template", template);
-        return "student/leave-review";
+    model.addAttribute("template", template);
+    model.addAttribute("reviews", reviews);
+    model.addAttribute("sessions", sessions);
+    return "student/class-details";
+  }
+
+  @GetMapping("/classes/{id}/reviews/new")
+  public String newReview(@PathVariable("id") Long templateId, Model model, HttpSession session) {
+    Long studentId = (Long) session.getAttribute("studentId");
+
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @PostMapping("/classes/{id}/reviews")
-    public String submitReview(@PathVariable("id") Long templateId, @RequestParam Integer rating, @RequestParam String comment, HttpSession session) {
-        Long studentId = (Long) session.getAttribute("studentId");
+    ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
+    model.addAttribute("template", template);
+    return "student/leave-review";
+  }
 
-        if (studentId == null) {
-            return "redirect:/signin";
-        }
+  @PostMapping("/classes/{id}/reviews")
+  public String submitReview(@PathVariable("id") Long templateId, @RequestParam Integer rating,
+      @RequestParam String comment, HttpSession session) {
+    Long studentId = (Long) session.getAttribute("studentId");
 
-        Student student = studentService.getStudentById(studentId).orElse(null);
-        ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
-
-        Review review = new Review();
-        review.setStudent(student);
-        review.setClassTemplate(template);
-        review.setRating(rating);
-        review.setComment(comment);
-
-        reviewService.createReview(review);
-        return "redirect:/student/classes/" + templateId;
+    if (studentId == null) {
+      return "redirect:/signin";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/signin";
-    }
+    Student student = studentService.getStudentById(studentId).orElse(null);
+    ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
+
+    Review review = new Review();
+    review.setStudent(student);
+    review.setClassTemplate(template);
+    review.setRating(rating);
+    review.setComment(comment);
+
+    reviewService.createReview(review);
+    return "redirect:/student/classes/" + templateId;
+  }
+
+  @GetMapping("/logout")
+  public String logout(HttpSession session) {
+    session.invalidate();
+    return "redirect:/signin";
+  }
 }
