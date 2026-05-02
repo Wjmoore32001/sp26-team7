@@ -67,6 +67,10 @@ public class ClassTemplateService {
       existingClassTemplate.setInstructor(updatedClassTemplate.getInstructor());
     }
 
+    if (updatedClassTemplate.getPublished() != null) {
+      existingClassTemplate.setPublished(updatedClassTemplate.getPublished());
+    }
+
     return classTemplateRepository.save(existingClassTemplate);
   }
 
