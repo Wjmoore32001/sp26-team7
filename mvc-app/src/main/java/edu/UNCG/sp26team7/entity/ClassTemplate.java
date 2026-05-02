@@ -1,4 +1,3 @@
-
 package edu.UNCG.sp26team7.entity;
 
 import java.math.BigDecimal;
@@ -63,10 +62,17 @@ public class ClassTemplate {
   @Column
   private String description;
 
+  @Column(nullable = false)
+  private Boolean published;
+
   @PrePersist
   private void onCreate() {
     createdAt = LocalDateTime.now();
     updatedAt = LocalDateTime.now();
+
+    if (published == null) {
+      published = false;
+    }
   }
 
   @PreUpdate
