@@ -76,20 +76,100 @@ function displayClasses(classes) {
     const col = document.createElement("div");
     col.className = "col-12";
 
+    const isPublished = classTemplate.published === true;
+    const statusText = isPublished ? "Published" : "Hidden";
+    const statusClass = isPublished ? "success" : "secondary";
+    const toggleButtonText = isPublished ? "Unpublish" : "Publish";
+    const toggleButtonClass = isPublished ? "btn-outline-warning" : "btn-primary";
+
     col.innerHTML = `
             <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 text-start">
-                <h4 class="mb-3">${escapeHtml(classTemplate.title || "Untitled Class")}</h4>
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                    <h4 class="mb-0">${escapeHtml(classTemplate.title || "Untitled Class")}</h4>
+                    <span class="badge text-bg-${statusClass}">${statusText}</span>
+                </div>
 
                 <p class="mb-2"><strong>Type:</strong> ${formatText(classTemplate.classType)}</p>
                 <p class="mb-2"><strong>Duration:</strong> ${classTemplate.duration || 0} min</p>
                 <p class="mb-2"><strong>Intensity:</strong> ${formatText(classTemplate.intensity)}</p>
                 <p class="mb-2"><strong>Price:</strong> $${formatPrice(classTemplate.price)}</p>
                 <p class="mb-3"><strong>Description:</strong> ${escapeHtml(classTemplate.description || "No description.")}</p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <button
+                        class="btn ${toggleButtonClass} publish-toggle-button"
+                        data-template-id="${classTemplate.classTemplateId}"
+                        data-published="${isPublished}">
+                        ${toggleButtonText}
+                    </button>
+                </div>
             </div>
         `;
 
     classList.appendChild(col);
   });
+
+  addPublishButtonListeners();
+}
+
+function addPublishButtonListeners() {
+  const buttons = document.querySelectorAll(".publish-toggle-button");
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.templateId;
+      const currentlyPublished = button.dataset.published === "true";
+      togglePublished(templateId, currentlyPublished);
+    });
+  });
+}
+
+function togglePublished(templateId, currentlyPublished) {
+  fetch("/classTemplates/" + templateId)
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load class template.");
+      }
+      return response.json();
+    })
+    .then(function (classTemplate) {
+      const updatedTemplate = {
+        title: classTemplate.title,
+        classType: classTemplate.classType,
+        intensity: classTemplate.intensity,
+        duration: classTemplate.duration,
+        price: classTemplate.price,
+        description: classTemplate.description,
+        instructor: classTemplate.instructor,
+        published: !currentlyPublished
+      };
+
+      return fetch("/classTemplates/" + templateId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedTemplate)
+      });
+    })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not update published status.");
+      }
+      return response.json();
+    })
+    .then(function (updatedTemplate) {
+      const message = updatedTemplate.published
+        ? "Class published successfully."
+        : "Class hidden successfully.";
+
+      messageArea.innerHTML = '<div class="alert alert-success">' + message + '</div>';
+      loadPage();
+    })
+    .catch(function (error) {
+      messageArea.innerHTML = '<div class="alert alert-danger">' + error.message + '</div>';
+      console.log(error);
+    });
 }
 
 function formatText(value) {
