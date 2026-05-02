@@ -20,6 +20,10 @@ public class ClassTemplateService {
     return classTemplateRepository.findAll();
   }
 
+  public List<ClassTemplate> getPublishedTemplates() {
+    return classTemplateRepository.findByPublishedTrue();
+  }
+
   public ClassTemplate getClassTemplateById(Long templateId) {
     return classTemplateRepository.findById(templateId).orElse(null);
   }
