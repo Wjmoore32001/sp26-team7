@@ -10,6 +10,7 @@ import edu.UNCG.sp26team7.repository.ClassSessionRepository;
 import edu.UNCG.sp26team7.repository.ClassTemplateRepository;
 import edu.UNCG.sp26team7.repository.EnrollmentRepository;
 import edu.UNCG.sp26team7.repository.StudentScheduleRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ClassSessionService {
@@ -83,6 +84,7 @@ public class ClassSessionService {
     return classSessionRepository.save(existingSession);
   }
 
+  @Transactional
   public boolean deleteClassSession(Long classSessionId) {
     if (!classSessionRepository.existsById(classSessionId)) {
       return false;
