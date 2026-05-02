@@ -59,6 +59,10 @@ public class StudentScheduleService {
     return studentScheduleRepository.findAll();
   }
 
+  public List<StudentSchedule> getSchedulesForStudent(Long userId) {
+    return studentScheduleRepository.findByStudentUserId(userId);
+  }
+
   public void deleteStudentSchedule(Long id) {
     studentScheduleRepository.deleteById(id);
   }

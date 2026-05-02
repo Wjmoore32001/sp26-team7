@@ -11,4 +11,5 @@ import edu.UNCG.sp26team7.entity.ClassSession;
 public interface ClassSessionRepository extends JpaRepository<ClassSession, Long> {
 
   List<ClassSession> findByClassTemplateClassTemplateId(Long classTemplateId);
+
 }

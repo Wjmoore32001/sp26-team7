@@ -2,7 +2,7 @@
 # Requirements
 
 **Project Name:** Gym Class Hub \
-**Team:** William Moore - Customer; Chloe Rhodes - Instructor \
+**Team:** Chloe Rhodes - Customer; William Moore - Instructor \
 **Course:** CSC 340-02\
 **Version:** 1.0\
 **Date:** 2026-01-30
@@ -65,28 +65,28 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     Then my updated information is saved to my account
   ```
   
-- **US‑CUST‑003 — Search/Filter Classes**  
-  _Story:_ As a customer, I want to search and filter classes by type and time so that I can find a class that fits my schedule.
+- **US‑CUST‑003 — views available classes**  
+  _Story:_ As a customer, I want to view classes so that I can find a class that fits my schedule.
   _Acceptance:_
   ```gherkin
-  Scenario: Search classes by search and/or filter
+  Scenario: View classes by search and/or filter
     Given there are multiple upcoming classes
     When  I search a class name or filter by class type
     Then  I only see classes matching my search criteria
   ```
   
-  - **US‑CUST‑004 — Join Waitlist**  
-    _Story:_ As a customer, I want to join a waitlist when a class is full so that I still have a chance to attend.
-    _Acceptance:_
+- **US‑CUST‑004 — Enroll**  
+  _Story:_ As a customer, I want to enroll in a class so that I can attend.
+  _Acceptance:_
   ```gherkin
-  Scenario: Join waitlist for a full class
-    Given a class is at max capacity
+  Scenario: Enroll in a class
+    Given a class is available
     When  I attempt to reserve a spot
-    Then  I am given the option to join the waitlist
+    Then  I am enrolled into the class
   ```
   
-- **US‑CUST‑005 — Leave Reviews on Classes**
-- _Story:_ As a customer, I want to leave reviews on classes I have attended, so that I can aid the community in knowing about a class from experience.
+- **US‑CUST‑005 — Write a review**
+  _Story:_ As a customer, I want to leave reviews on classes I have attended, so that I can aid the community in knowing about a class from experience.
   _Acceptance:_
   ```gherkin
   Scenario: Leave a review

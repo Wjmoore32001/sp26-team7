@@ -58,4 +58,9 @@ public class InstructorService {
     instructorRepository.deleteById(userId);
     return true;
   }
+
+  public Instructor getInstructorByEmail(String email) {
+    return instructorRepository.findByEmail(email);
+  }
+
 }
