@@ -38,6 +38,12 @@ public class AppUiController {
     return "signup";
   }
 
+  @GetMapping("/logout")
+  public String logout(HttpSession session) {
+    session.invalidate();
+    return "redirect:/signin";
+  }
+
   @PostMapping("/signin")
   public String signin(@RequestParam String email,
       @RequestParam String password,
