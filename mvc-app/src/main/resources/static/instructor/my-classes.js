@@ -556,20 +556,99 @@ function displayReviews(templateId, reviews) {
   let html = "";
 
   reviews.forEach(function (review) {
+    const safeStudentName = escapeHtml(review.student && review.student.name ? review.student.name : "Unknown");
+    const safeComment = escapeHtml(review.comment || "");
+    const safeReply = escapeHtml(review.replyText || "");
+
     html += `
             <div class="border rounded-3 p-3 mb-2">
-                <p class="mb-2"><strong>Student:</strong> ${escapeHtml(review.student && review.student.name ? review.student.name : "Unknown")}</p>
+                <p class="mb-2"><strong>Student:</strong> ${safeStudentName}</p>
                 <p class="mb-2"><strong>Rating:</strong> ${review.rating || 0}/5</p>
-                <p class="mb-2"><strong>Comment:</strong> ${escapeHtml(review.comment || "")}</p>
+                <p class="mb-2"><strong>Comment:</strong> ${safeComment}</p>
+
                 ${review.replyText
-        ? `<p class="mb-0"><strong>Reply:</strong> ${escapeHtml(review.replyText)}</p>`
+        ? `<p class="mb-2"><strong>Reply:</strong> ${safeReply}</p>`
         : ""
       }
+
+                <div class="mt-3">
+                    <label class="form-label" for="reply-text-${review.reviewId}">Instructor Reply</label>
+                    <textarea class="form-control mb-2" rows="2" id="reply-text-${review.reviewId}">${safeReply}</textarea>
+                    <button
+                        class="btn btn-outline-primary save-reply-button"
+                        data-review-id="${review.reviewId}"
+                        data-template-id="${templateId}">
+                        Save Reply
+                    </button>
+                </div>
             </div>
         `;
   });
 
   reviewsList.innerHTML = html;
+  addReplyButtonListeners();
+}
+
+function addReplyButtonListeners() {
+  const replyButtons = document.querySelectorAll(".save-reply-button");
+
+  replyButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const reviewId = button.dataset.reviewId;
+      const templateId = button.dataset.templateId;
+      saveReply(reviewId, templateId);
+    });
+  });
+}
+
+function saveReply(reviewId, templateId) {
+  const replyText = document.getElementById("reply-text-" + reviewId).value;
+
+  fetch("/api/reviews/" + reviewId)
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load review.");
+      }
+      return response.json();
+    })
+    .then(function (review) {
+      const updatedReview = {
+        rating: review.rating,
+        comment: review.comment,
+        replyText: replyText,
+        student: review.student,
+        classTemplate: review.classTemplate
+      };
+
+      return fetch("/api/reviews/" + reviewId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedReview)
+      });
+    })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not save reply.");
+      }
+      return response.json();
+    })
+    .then(function () {
+      messageArea.innerHTML = '<div class="alert alert-success">Reply saved successfully.</div>';
+      const reviewsSection = document.getElementById("reviews-" + templateId);
+      reviewsSection.dataset.loaded = "false";
+      toggleReviews(templateId, findReviewToggleButton(templateId));
+      toggleReviews(templateId, findReviewToggleButton(templateId));
+    })
+    .catch(function (error) {
+      messageArea.innerHTML = '<div class="alert alert-danger">' + error.message + '</div>';
+      console.log(error);
+    });
+}
+
+function findReviewToggleButton(templateId) {
+  return document.querySelector('.reviews-toggle-button[data-template-id="' + templateId + '"]');
 }
 
 function addSessionButtonListeners() {

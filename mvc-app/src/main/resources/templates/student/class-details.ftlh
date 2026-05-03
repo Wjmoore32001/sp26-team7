@@ -100,7 +100,13 @@
               <div class="border rounded-3 p-3 mb-3">
                 <p class="mb-2"><strong>Student:</strong> ${review.student.name!""}</p>
                 <p class="mb-2"><strong>Rating:</strong> ${review.rating!0}/5</p>
-                <p class="mb-0"><strong>Comment:</strong> ${review.comment!""}</p>
+                <p class="mb-2"><strong>Comment:</strong> ${review.comment!""}</p>
+
+                <#if review.replyText?? && review.replyText?has_content>
+                  <div class="mt-3 p-3 rounded-3 border border-primary-subtle bg-primary-subtle">
+                    <p class="mb-0"><strong>Instructor Reply:</strong> ${review.replyText}</p>
+                  </div>
+                </#if>
               </div>
             </#list>
             <#else>
