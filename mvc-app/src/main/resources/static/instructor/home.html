@@ -4,50 +4,81 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Instructor Home</title>
+  <title>Instructor Dashboard</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-  <link href="/assets/css/theme.css" rel="stylesheet">
+  <link href="../assets/css/theme.css" rel="stylesheet">
+  <script defer src="../assets/js/include-nav.js" data-nav="instructor"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">GCH</a>
+  <div id="nav-placeholder"></div>
 
-      <div class="collapse navbar-collapse show">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="/">Home</a>
-          </li>
-        </ul>
-
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="/signin">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/signup">Sign Up</a>
-          </li>
-        </ul>
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col p-3 bg-body-tertiary border border-primary-subtle rounded-3 text-center">
+        <h1 class="text-light mb-2">Instructor Dashboard</h1>
+        <p class="mb-0 text-secondary">
+          Manage your classes, publish them for students, schedule sessions, browse other classes, and respond to
+          reviews.
+        </p>
       </div>
     </div>
-  </nav>
 
-  <div class="container text-center mt-4">
-    <div class="row">
-      <div class="col-lg-10 mx-auto">
-        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3">
-          <h1 class="display-4 mb-3">Instructor Home</h1>
-          <p class="lead mb-4">
-            Instructor signup and login now work, and this page is being served as a static HTML page.
+    <div class="row mt-4 g-3">
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Manage Your Classes</h3>
+          <p class="mb-3">
+            Create class templates, edit class details, publish or hide classes, schedule sessions,
+            reschedule existing sessions, and cancel sessions when needed.
           </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/my-classes.html" class="btn btn-primary">Go to My Classes</a>
+            <a href="/instructor/create-class-template.html" class="btn btn-outline-secondary">Create Class</a>
+          </div>
+        </div>
+      </div>
 
-          <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="/" class="btn btn-outline-secondary btn-lg">Back Home</a>
-            <a href="/signin" class="btn btn-primary btn-lg">Login Again</a>
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Browse Other Published Classes</h3>
+          <p class="mb-3">
+            Explore published classes from other instructors and use filters to narrow results by
+            title, type, intensity, and price.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/browse.html" class="btn btn-primary">Browse Classes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 g-3">
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Review Student Feedback</h3>
+          <p class="mb-3">
+            Open reviews for each of your classes, read student comments, and reply directly so
+            students can see your response on the class details page.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/my-classes.html" class="btn btn-outline-info">View My Class Reviews</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Account</h3>
+          <p class="mb-3">
+            View your instructor profile information and sign out when you are done testing or ready
+            to switch to a student account.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/profile.html" class="btn btn-outline-secondary">Profile</a>
           </div>
         </div>
       </div>
