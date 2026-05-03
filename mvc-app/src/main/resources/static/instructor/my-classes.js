@@ -114,6 +114,12 @@ function displayClasses(classes) {
                         data-template-id="${classTemplate.classTemplateId}">
                         Schedule Session
                     </button>
+
+                    <button
+                        class="btn btn-outline-info reviews-toggle-button"
+                        data-template-id="${classTemplate.classTemplateId}">
+                        View Reviews
+                    </button>
                 </div>
 
                 <div id="edit-form-${classTemplate.classTemplateId}" class="d-none border-top pt-3 mt-3">
@@ -187,6 +193,11 @@ function displayClasses(classes) {
                     </div>
                 </div>
 
+                <div id="reviews-${classTemplate.classTemplateId}" class="d-none border-top pt-3 mt-3">
+                    <h5 class="mb-3">Reviews</h5>
+                    <div class="reviews-list">Loading reviews...</div>
+                </div>
+
                 <div id="sessions-${classTemplate.classTemplateId}" class="border-top pt-3 mt-3">
                     <h5 class="mb-3">Sessions</h5>
                     <div class="session-list">Loading sessions...</div>
@@ -250,6 +261,14 @@ function addButtonListeners() {
     button.addEventListener("click", function () {
       const templateId = button.dataset.templateId;
       createSession(templateId);
+    });
+  });
+
+  const reviewsToggleButtons = document.querySelectorAll(".reviews-toggle-button");
+  reviewsToggleButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const templateId = button.dataset.templateId;
+      toggleReviews(templateId, button);
     });
   });
 }
@@ -487,6 +506,70 @@ function displaySessions(templateId, sessions) {
 
   sessionsContainer.innerHTML = html;
   addSessionButtonListeners();
+}
+
+function toggleReviews(templateId, button) {
+  const reviewsSection = document.getElementById("reviews-" + templateId);
+  const reviewsList = reviewsSection.querySelector(".reviews-list");
+  const isHidden = reviewsSection.classList.contains("d-none");
+
+  if (!isHidden) {
+    reviewsSection.classList.add("d-none");
+    button.textContent = "View Reviews";
+    return;
+  }
+
+  reviewsSection.classList.remove("d-none");
+  button.textContent = "Hide Reviews";
+
+  if (reviewsSection.dataset.loaded === "true") {
+    return;
+  }
+
+  reviewsList.innerHTML = "Loading reviews...";
+
+  fetch("/api/reviews/class-template/" + templateId)
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Could not load reviews.");
+      }
+      return response.json();
+    })
+    .then(function (reviews) {
+      displayReviews(templateId, reviews);
+      reviewsSection.dataset.loaded = "true";
+    })
+    .catch(function (error) {
+      reviewsList.innerHTML = '<p class="mb-0">Could not load reviews.</p>';
+      console.log(error);
+    });
+}
+
+function displayReviews(templateId, reviews) {
+  const reviewsList = document.querySelector("#reviews-" + templateId + " .reviews-list");
+
+  if (!reviews || reviews.length === 0) {
+    reviewsList.innerHTML = '<p class="mb-0">No reviews yet.</p>';
+    return;
+  }
+
+  let html = "";
+
+  reviews.forEach(function (review) {
+    html += `
+            <div class="border rounded-3 p-3 mb-2">
+                <p class="mb-2"><strong>Student:</strong> ${escapeHtml(review.student && review.student.name ? review.student.name : "Unknown")}</p>
+                <p class="mb-2"><strong>Rating:</strong> ${review.rating || 0}/5</p>
+                <p class="mb-2"><strong>Comment:</strong> ${escapeHtml(review.comment || "")}</p>
+                ${review.replyText
+        ? `<p class="mb-0"><strong>Reply:</strong> ${escapeHtml(review.replyText)}</p>`
+        : ""
+      }
+            </div>
+        `;
+  });
+
+  reviewsList.innerHTML = html;
 }
 
 function addSessionButtonListeners() {
