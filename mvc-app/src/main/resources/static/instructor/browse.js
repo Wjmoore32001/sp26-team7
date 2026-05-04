@@ -8,6 +8,8 @@ const priceFilter = document.getElementById("price-filter");
 const applyFiltersButton = document.getElementById("apply-filters-button");
 const clearFiltersButton = document.getElementById("clear-filters-button");
 
+const DEFAULT_IMAGE_PATH = "/assets/images/placeholdergeneral.png";
+
 let allTemplates = [];
 let currentInstructorId = null;
 
@@ -100,9 +102,10 @@ function getFilteredTemplates() {
       selectedIntensity === "" ||
       template.intensity === selectedIntensity;
 
-    const templatePrice = template.price === null || template.price === undefined
-      ? 0
-      : Number(template.price);
+    const templatePrice =
+      template.price === null || template.price === undefined
+        ? 0
+        : Number(template.price);
 
     const matchesPrice =
       maxPrice === null ||
@@ -129,9 +132,23 @@ function renderTemplates(templates) {
     const card = document.createElement("div");
     card.className = "p-4 bg-body-tertiary border border-primary-subtle rounded-3";
 
+    const resolvedImagePath =
+      template.imageUrl && template.imageUrl.trim() !== ""
+        ? template.imageUrl
+        : DEFAULT_IMAGE_PATH;
+
     card.innerHTML = `
-            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
-                <div>
+            <div class="row g-3 align-items-start">
+                <div class="col-md-4 col-lg-3">
+                    <img
+                        src="${escapeAttribute(resolvedImagePath)}"
+                        alt="Class image"
+                        class="img-fluid rounded border border-primary-subtle"
+                        style="max-height: 220px;"
+                        onerror="this.onerror=null;this.src='${DEFAULT_IMAGE_PATH}';">
+                </div>
+
+                <div class="col-md-8 col-lg-9">
                     <h3 class="mb-2">${escapeHtml(template.title || "Untitled Class")}</h3>
                     <p class="mb-1"><strong>Instructor:</strong> ${escapeHtml(template.instructor && template.instructor.name ? template.instructor.name : "Unknown")}</p>
                     <p class="mb-1"><strong>Type:</strong> ${formatText(template.classType)}</p>
@@ -171,6 +188,14 @@ function formatPrice(price) {
 function escapeHtml(text) {
   return String(text)
     .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function escapeAttribute(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 }

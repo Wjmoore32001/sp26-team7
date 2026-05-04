@@ -62,3 +62,6 @@
 - Since the not logged in users pages are handled in the Student controller for some reason a number of changes needed to be made 
   since browse is also for student and not logged in reason i had to modify browse.ftlh to have filters and allow the not logged in user to use it.
 - Had to actually rewrite almost the entire browse.ftlh so that it uses the filters, and added a js script in it for event listeners.
+- browse and class details for student/not-logged-in/instructor didn't display class or instructor images
+  - had to update browse.ftlh/class-details.ftlh/browse.js to get the images to show.
+- Since browse is both for not logged in and student it need to pass in a login state so made another fix to studentuicontroller

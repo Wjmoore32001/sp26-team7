@@ -20,19 +20,19 @@
       <div class="collapse navbar-collapse show">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="/student/home">Home</a>
+            <a class="nav-link active" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/student/my-classes">My Classes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/student/browse">Browse</a>
+            <a class="nav-link active" href="/browse">Browse</a>
           </li>
         </ul>
 
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="/student/profile">Profile</a>
+            <a class="nav-link active" href="/signin">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/signup">Sign Up</a>
           </li>
         </ul>
       </div>
@@ -49,13 +49,34 @@
     <div class="row mt-3">
       <div class="col-lg-10 mx-auto text-start">
         <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 mb-3">
-          <h3 class="mb-3">Class Information</h3>
-          <p class="mb-2"><strong>Instructor:</strong> ${template.instructor.name!""}</p>
-          <p class="mb-2"><strong>Type:</strong> ${template.classType!""}</p>
-          <p class="mb-2"><strong>Intensity:</strong> ${template.intensity!""}</p>
-          <p class="mb-2"><strong>Duration:</strong> ${template.duration!0} min</p>
-          <p class="mb-2"><strong>Price:</strong> $${template.price!0}</p>
-          <p class="mb-0"><strong>Description:</strong> ${template.description!"No description."}</p>
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-8">
+              <h3 class="mb-3">Class Information</h3>
+
+              <div class="mb-3">
+                <img src="${template.imageUrl!'/assets/images/placeholdergeneral.png'}" alt="Class image"
+                  class="img-fluid rounded border border-primary-subtle" style="max-height: 280px;"
+                  onerror="this.onerror=null;this.src='/assets/images/placeholdergeneral.png';">
+              </div>
+
+              <p class="mb-2"><strong>Type:</strong> ${template.classType!""}</p>
+              <p class="mb-2"><strong>Intensity:</strong> ${template.intensity!""}</p>
+              <p class="mb-2"><strong>Duration:</strong> ${template.duration!0} min</p>
+              <p class="mb-2"><strong>Price:</strong> $${template.price!0}</p>
+              <p class="mb-0"><strong>Description:</strong> ${template.description!"No description."}</p>
+            </div>
+
+            <div class="col-lg-4">
+              <h3 class="mb-3">Instructor</h3>
+              <div class="text-center p-3 border rounded-3">
+                <img src="${template.instructor.profileImageUrl!'/assets/images/placeholdergeneral.png'}"
+                  alt="Instructor image" class="img-fluid rounded border border-primary-subtle mb-3"
+                  style="max-height: 140px;"
+                  onerror="this.onerror=null;this.src='/assets/images/placeholdergeneral.png';">
+                <p class="mb-0"><strong>${template.instructor.name!""}</strong></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.UNCG.sp26team7.service.ClassSessionService;
-import edu.UNCG.sp26team7.service.ClassTemplateService;
-import edu.UNCG.sp26team7.service.ReviewService;
-import edu.UNCG.sp26team7.service.StudentScheduleService;
-import edu.UNCG.sp26team7.service.StudentService;
 import edu.UNCG.sp26team7.entity.ClassSession;
 import edu.UNCG.sp26team7.entity.ClassTemplate;
 import edu.UNCG.sp26team7.entity.Review;
 import edu.UNCG.sp26team7.entity.Student;
 import edu.UNCG.sp26team7.entity.StudentSchedule;
 import edu.UNCG.sp26team7.entity.enums.BookingStatus;
+import edu.UNCG.sp26team7.service.ClassSessionService;
+import edu.UNCG.sp26team7.service.ClassTemplateService;
+import edu.UNCG.sp26team7.service.ReviewService;
+import edu.UNCG.sp26team7.service.StudentScheduleService;
+import edu.UNCG.sp26team7.service.StudentService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -94,7 +94,10 @@ public class StudentUiController {
   }
 
   @GetMapping("/browse")
-  public String browseClasses(Model model) {
+  public String browseClasses(HttpSession session, Model model) {
+    Long studentId = (Long) session.getAttribute("studentId");
+
+    model.addAttribute("studentLoggedIn", studentId != null);
     model.addAttribute("templates", classTemplateService.getPublishedTemplates());
     return "student/browse";
   }
@@ -154,10 +157,13 @@ public class StudentUiController {
 
   @GetMapping("/classes/{id}")
   public String classDetails(@PathVariable("id") Long templateId, Model model, HttpSession session) {
+    Long studentId = (Long) session.getAttribute("studentId");
+
     ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
     List<Review> reviews = reviewService.getReviewsByClassTemplateId(templateId);
     List<ClassSession> sessions = classSessionService.getSessionsByClassTemplateId(templateId);
 
+    model.addAttribute("studentLoggedIn", studentId != null);
     model.addAttribute("template", template);
     model.addAttribute("reviews", reviews);
     model.addAttribute("sessions", sessions);
