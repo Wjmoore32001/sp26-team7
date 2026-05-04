@@ -94,13 +94,7 @@ public class StudentUiController {
   }
 
   @GetMapping("/browse")
-  public String browseClasses(HttpSession session, Model model) {
-    Long studentId = (Long) session.getAttribute("studentId");
-
-    if (studentId == null) {
-      return "redirect:/signin";
-    }
-
+  public String browseClasses(Model model) {
     model.addAttribute("templates", classTemplateService.getPublishedTemplates());
     return "student/browse";
   }
@@ -160,12 +154,6 @@ public class StudentUiController {
 
   @GetMapping("/classes/{id}")
   public String classDetails(@PathVariable("id") Long templateId, Model model, HttpSession session) {
-    Long studentId = (Long) session.getAttribute("studentId");
-
-    if (studentId == null) {
-      return "redirect:/signin";
-    }
-
     ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
     List<Review> reviews = reviewService.getReviewsByClassTemplateId(templateId);
     List<ClassSession> sessions = classSessionService.getSessionsByClassTemplateId(templateId);
