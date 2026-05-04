@@ -19,21 +19,39 @@
 
       <div class="collapse navbar-collapse show">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/browse">Browse</a>
-          </li>
+          <#if studentLoggedIn?? && studentLoggedIn>
+            <li class="nav-item">
+              <a class="nav-link active" href="/student/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/student/my-classes">My Classes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/student/browse">Browse</a>
+            </li>
+            <#else>
+              <li class="nav-item">
+                <a class="nav-link active" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/browse">Browse</a>
+              </li>
+          </#if>
         </ul>
 
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="/signin">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/signup">Sign Up</a>
-          </li>
+          <#if studentLoggedIn?? && studentLoggedIn>
+            <li class="nav-item">
+              <a class="nav-link active" href="/student/profile">Profile</a>
+            </li>
+            <#else>
+              <li class="nav-item">
+                <a class="nav-link active" href="/signin">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/signup">Sign Up</a>
+              </li>
+          </#if>
         </ul>
       </div>
     </div>
@@ -45,6 +63,22 @@
         <h1 class="text-light">${template.title!"Class Details"}</h1>
       </div>
     </div>
+
+    <#if RequestParameters.joined??>
+      <div class="row mt-3">
+        <div class="col-lg-10 mx-auto">
+          <div class="alert alert-success mb-0">You joined this session successfully.</div>
+        </div>
+      </div>
+    </#if>
+
+    <#if RequestParameters.enrollError??>
+      <div class="row mt-3">
+        <div class="col-lg-10 mx-auto">
+          <div class="alert alert-danger mb-0">Could not join this session. You may already be enrolled.</div>
+        </div>
+      </div>
+    </#if>
 
     <div class="row mt-3">
       <div class="col-lg-10 mx-auto text-start">
@@ -93,6 +127,7 @@
 
                 <form method="post" action="/student/enroll" class="mb-0">
                   <input type="hidden" name="classSessionId" value="${session.classSessionId}">
+                  <input type="hidden" name="templateId" value="${template.classTemplateId}">
                   <button type="submit" class="btn btn-primary">Join Session</button>
                 </form>
               </div>

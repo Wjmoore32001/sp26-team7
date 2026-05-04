@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.UNCG.sp26team7.service.ClassSessionService;
+import edu.UNCG.sp26team7.service.ClassTemplateService;
+import edu.UNCG.sp26team7.service.ReviewService;
+import edu.UNCG.sp26team7.service.StudentScheduleService;
+import edu.UNCG.sp26team7.service.StudentService;
 import edu.UNCG.sp26team7.entity.ClassSession;
 import edu.UNCG.sp26team7.entity.ClassTemplate;
 import edu.UNCG.sp26team7.entity.Review;
 import edu.UNCG.sp26team7.entity.Student;
 import edu.UNCG.sp26team7.entity.StudentSchedule;
 import edu.UNCG.sp26team7.entity.enums.BookingStatus;
-import edu.UNCG.sp26team7.service.ClassSessionService;
-import edu.UNCG.sp26team7.service.ClassTemplateService;
-import edu.UNCG.sp26team7.service.ReviewService;
-import edu.UNCG.sp26team7.service.StudentScheduleService;
-import edu.UNCG.sp26team7.service.StudentService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -94,7 +94,7 @@ public class StudentUiController {
   }
 
   @GetMapping("/browse")
-  public String browseClasses(HttpSession session, Model model) {
+  public String browseClasses(Model model, HttpSession session) {
     Long studentId = (Long) session.getAttribute("studentId");
 
     model.addAttribute("studentLoggedIn", studentId != null);
@@ -108,26 +108,30 @@ public class StudentUiController {
   }
 
   @PostMapping("/enroll")
-  public String enroll(@RequestParam Long classSessionId, HttpSession session) {
+  public String enroll(@RequestParam Long classSessionId, @RequestParam Long templateId, HttpSession session) {
     Long studentId = (Long) session.getAttribute("studentId");
 
     if (studentId == null) {
       return "redirect:/signin";
     }
 
-    StudentSchedule schedule = new StudentSchedule();
-    Student student = new Student();
-    student.setUserId(studentId);
-    ClassSession classSession = new ClassSession();
-    classSession.setClassSessionId(classSessionId);
+    try {
+      StudentSchedule schedule = new StudentSchedule();
+      Student student = new Student();
+      student.setUserId(studentId);
+      ClassSession classSession = new ClassSession();
+      classSession.setClassSessionId(classSessionId);
 
-    schedule.setStudent(student);
-    schedule.setClassSession(classSession);
-    schedule.setEnrolledAt(LocalDateTime.now());
-    schedule.setBookingStatus(BookingStatus.ENROLLED);
+      schedule.setStudent(student);
+      schedule.setClassSession(classSession);
+      schedule.setEnrolledAt(LocalDateTime.now());
+      schedule.setBookingStatus(BookingStatus.ENROLLED);
 
-    studentScheduleService.createStudentSchedule(schedule);
-    return "redirect:/student/browse?joined";
+      studentScheduleService.createStudentSchedule(schedule);
+      return "redirect:/student/classes/" + templateId + "?joined";
+    } catch (RuntimeException ex) {
+      return "redirect:/student/classes/" + templateId + "?enrollError";
+    }
   }
 
   @PostMapping("/cancel")
