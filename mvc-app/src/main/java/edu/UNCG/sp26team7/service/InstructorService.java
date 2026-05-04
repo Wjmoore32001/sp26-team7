@@ -47,6 +47,10 @@ public class InstructorService {
       existingInstructor.setPasswordHash(updatedInstructor.getPasswordHash());
     }
 
+    if (updatedInstructor.getProfileImageUrl() != null) {
+      existingInstructor.setProfileImageUrl(updatedInstructor.getProfileImageUrl());
+    }
+
     return instructorRepository.save(existingInstructor);
   }
 

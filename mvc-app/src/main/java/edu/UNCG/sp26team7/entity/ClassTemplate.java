@@ -62,6 +62,9 @@ public class ClassTemplate {
   @Column
   private String description;
 
+  @Column
+  private String imageUrl;
+
   @Column(nullable = false)
   private Boolean published;
 

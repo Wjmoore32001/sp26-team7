@@ -1,6 +1,8 @@
 const classList = document.getElementById("class-list");
 const messageArea = document.getElementById("message-area");
 
+const DEFAULT_IMAGE_PATH = "/assets/images/placeholdergeneral.png";
+
 loadPage();
 
 function loadPage() {
@@ -89,6 +91,15 @@ function displayClasses(classes) {
                     <span class="badge text-bg-${statusClass}">${statusText}</span>
                 </div>
 
+                <div class="mb-3">
+                    <img
+                        src="${escapeAttribute(classTemplate.imageUrl || DEFAULT_IMAGE_PATH)}"
+                        alt="Class template image"
+                        class="img-fluid rounded border border-primary-subtle"
+                        style="max-height: 220px;"
+                        onerror="this.onerror=null;this.src='${DEFAULT_IMAGE_PATH}';">
+                </div>
+
                 <p class="mb-2"><strong>Type:</strong> ${formatText(classTemplate.classType)}</p>
                 <p class="mb-2"><strong>Duration:</strong> ${classTemplate.duration || 0} min</p>
                 <p class="mb-2"><strong>Intensity:</strong> ${formatText(classTemplate.intensity)}</p>
@@ -152,6 +163,17 @@ function displayClasses(classes) {
                         <select class="form-select" id="edit-intensity-${classTemplate.classTemplateId}">
                             ${buildIntensityOptions(classTemplate.intensity)}
                         </select>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="edit-imageUrl-${classTemplate.classTemplateId}">Image Path</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="edit-imageUrl-${classTemplate.classTemplateId}"
+                            value="${escapeAttribute(classTemplate.imageUrl || "")}"
+                            placeholder="/assets/images/placeholdergeneral.png">
+                        <div class="form-text">Example: /assets/images/placeholdergeneral.png</div>
                     </div>
 
                     <div class="mb-3">
@@ -337,6 +359,7 @@ function saveTemplateEdit(templateId) {
         duration: parseInt(document.getElementById("edit-duration-" + templateId).value),
         price: parseFloat(document.getElementById("edit-price-" + templateId).value),
         description: document.getElementById("edit-description-" + templateId).value,
+        imageUrl: document.getElementById("edit-imageUrl-" + templateId).value,
         instructor: classTemplate.instructor,
         published: classTemplate.published
       };

@@ -22,7 +22,8 @@ public class ClassTemplateService {
   private final StudentScheduleRepository studentScheduleRepository;
   private final ReviewRepository reviewRepository;
 
-  public ClassTemplateService(ClassTemplateRepository classTemplateRepository,
+  public ClassTemplateService(
+      ClassTemplateRepository classTemplateRepository,
       ClassSessionRepository classSessionRepository,
       EnrollmentRepository enrollmentRepository,
       StudentScheduleRepository studentScheduleRepository,
@@ -83,6 +84,10 @@ public class ClassTemplateService {
 
     if (updatedClassTemplate.getDescription() != null) {
       existingClassTemplate.setDescription(updatedClassTemplate.getDescription());
+    }
+
+    if (updatedClassTemplate.getImageUrl() != null) {
+      existingClassTemplate.setImageUrl(updatedClassTemplate.getImageUrl());
     }
 
     if (updatedClassTemplate.getInstructor() != null) {
