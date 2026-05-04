@@ -28,6 +28,11 @@ public class AppUiController {
     return "home";
   }
 
+  @GetMapping("/browse")
+  public String browse() {
+    return "redirect:/student/browse";
+  }
+
   @GetMapping("/signin")
   public String signin() {
     return "signin";
