@@ -47,6 +47,10 @@ public class InstructorService {
       existingInstructor.setPasswordHash(updatedInstructor.getPasswordHash());
     }
 
+    if (updatedInstructor.getProfileImageUrl() != null) {
+      existingInstructor.setProfileImageUrl(updatedInstructor.getProfileImageUrl());
+    }
+
     return instructorRepository.save(existingInstructor);
   }
 
@@ -63,4 +67,13 @@ public class InstructorService {
     return instructorRepository.findByEmail(email);
   }
 
+  public Instructor authenticate(String email, String password) {
+    Instructor instructor = getInstructorByEmail(email);
+
+    if (instructor != null && instructor.getPasswordHash().equals(password)) {
+      return instructor;
+    }
+
+    throw new RuntimeException("Invalid email or password");
+  }
 }

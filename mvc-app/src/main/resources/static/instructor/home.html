@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instructor Dashboard</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <link href="../assets/css/theme.css" rel="stylesheet">
+  <script defer src="../assets/js/include-nav.js" data-nav="instructor"></script>
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col p-3 bg-body-tertiary border border-primary-subtle rounded-3 text-center">
+        <h1 class="text-light mb-2">Instructor Dashboard</h1>
+        <p class="mb-0 text-secondary">
+          Manage your classes, publish them for students, schedule sessions, browse other classes, and respond to
+          reviews.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mt-4 g-3">
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Manage Your Classes</h3>
+          <p class="mb-3">
+            Create class templates, edit class details, publish or hide classes, schedule sessions,
+            reschedule existing sessions, and cancel sessions when needed.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/my-classes.html" class="btn btn-primary">Go to My Classes</a>
+            <a href="/instructor/create-class-template.html" class="btn btn-outline-secondary">Create Class</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Browse Other Published Classes</h3>
+          <p class="mb-3">
+            Explore published classes from other instructors and use filters to narrow results by
+            title, type, intensity, and price.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/browse.html" class="btn btn-primary">Browse Classes</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 g-3">
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Review Student Feedback</h3>
+          <p class="mb-3">
+            Open reviews for each of your classes, read student comments, and reply directly so
+            students can see your response on the class details page.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/my-classes.html" class="btn btn-outline-info">View My Class Reviews</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="h-100 p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+          <h3 class="mb-3">Account</h3>
+          <p class="mb-3">
+            View your instructor profile information and sign out when you are done testing or ready
+            to switch to a student account.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="/instructor/profile.html" class="btn btn-outline-secondary">Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

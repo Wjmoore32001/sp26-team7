@@ -1,15 +1,15 @@
 package edu.UNCG.sp26team7.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.stereotype.Repository;
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import edu.UNCG.sp26team7.entity.ClassTemplate;
 
 @Repository
-public interface ClassTemplateRepository
-    extends JpaRepository<ClassTemplate, Long>, JpaSpecificationExecutor<ClassTemplate> {
+public interface ClassTemplateRepository extends JpaRepository<ClassTemplate, Long> {
+  List<ClassTemplate> findByInstructorUserId(Long userId);
 
-  public List<ClassTemplate> findByInstructorUserId(Long userId);
+  List<ClassTemplate> findByPublishedTrue();
 }
