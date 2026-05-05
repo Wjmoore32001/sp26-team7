@@ -50,3 +50,23 @@
   - available sessions
   - reviews
 - Added display of instructor replies on the student class details page.
+
+
+## New Thing Changed/Added 05/04/26
+- If a not logged in user clicks browse it redirects to the login page instead of letting them see classes
+  - It now redirects if they try to join a session or leave a review.
+- if on the login page and browse is hit, you get a white label error 
+  - fixed that endpoint
+- because the app was setup with freemarker and not from a perspective of working with how instructor was programmed, browse for a not logged in user can't use the filtered functionality of the instructors filter code in browse.
+  - had to fix student browse functionality so it actual has functioning filters so a not logged in user can use it.
+- Since the not logged in users pages are handled in the Student controller for some reason a number of changes needed to be made 
+  since browse is also for student and not logged in reason i had to modify browse.ftlh to have filters and allow the not logged in user to use it.
+- Had to actually rewrite almost the entire browse.ftlh so that it uses the filters, and added a js script in it for event listeners.
+- browse and class details for student/not-logged-in/instructor didn't display class or instructor images
+  - had to update browse.ftlh/class-details.ftlh/browse.js to get the images to show.
+- Since browse is both for not logged in and student it needed to pass in a login state so made another fix to studentuicontroller
+- Student had no form of exception handling for if a student tries to join a session they are already in so you'd get a white label error
+- Student can't delete nor edit their own reviews.
+- Students can't easily find their reviews
+- Students can't find classes they have attended before from my classes unless they are currently enrolled in a class session.
+- Not logged in home page wasn't the original home page style used in the prototype so fixed that.

@@ -4,11 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GCH Home</title>
+  <title>Gym Class Hub</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
   <link href="/assets/css/theme.css" rel="stylesheet">
 </head>
 
@@ -23,7 +22,7 @@
             <a class="nav-link active" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/student/browse">Browse</a>
+            <a class="nav-link active" href="/browse">Browse</a>
           </li>
         </ul>
 
@@ -39,19 +38,65 @@
     </div>
   </nav>
 
-  <div class="container text-center mt-4">
-    <div class="row">
-      <div class="col-lg-10 mx-auto">
-        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3">
-          <h1 class="display-4 mb-3">Gym Class Hub</h1>
-          <p class="lead mb-4">
-            Browse fitness classes, manage schedules, and explore instructor-led sessions.
-          </p>
+  <div class="container text-center">
+    <div class="row mt-3">
+      <div class="col p-4 bg-body-tertiary border border-primary-subtle rounded-3">
+        <h1 class="display-5 mb-2">Gym Class Hub</h1>
+        <div class="row mt-3 g-2">
+          <div class="col-md-4">
+            <a class="btn btn-primary w-100" href="/signin">Login</a>
+          </div>
+          <div class="col-md-4">
+            <a class="btn btn-outline-secondary w-100" href="/signup">Create Account</a>
+          </div>
+          <div class="col-md-4">
+            <a class="btn btn-outline-info w-100" href="/browse">Browse</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="/signin" class="btn btn-primary btn-lg">Login</a>
-            <a href="/signup" class="btn btn-outline-secondary btn-lg">Create Account</a>
-            <a href="/student/browse" class="btn btn-outline-info btn-lg">Browse Classes</a>
+    <div class="row mt-3 g-3 text-start">
+      <div class="col-lg-6">
+        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 h-100">
+          <h2 class="h4 mb-2">For Students</h2>
+          <div class="text-body-secondary mb-3">Find classes that match your goals and join with ease.</div>
+
+          <div class="p-3 border border-secondary-subtle rounded-3 mb-3">
+            <h3 class="h6 mb-1">Browse classes</h3>
+            <div class="small text-body-secondary">Filter by type, time, price, intensity, and availability.</div>
+          </div>
+
+          <div class="p-3 border border-secondary-subtle rounded-3 mb-3">
+            <h3 class="h6 mb-1">Join and manage your schedule</h3>
+            <div class="small text-body-secondary">Quick join, waitlist, and view everything on your dashboard.</div>
+          </div>
+
+          <div class="p-3 border border-secondary-subtle rounded-3">
+            <h3 class="h6 mb-1">Leave reviews</h3>
+            <div class="small text-body-secondary">Rate classes and share feedback with instructors.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="p-4 bg-body-tertiary border border-primary-subtle rounded-3 h-100">
+          <h2 class="h4 mb-2">For Instructors</h2>
+          <div class="text-body-secondary mb-3">Create classes, manage rosters, and keep your schedule organized.</div>
+
+          <div class="p-3 border border-secondary-subtle rounded-3 mb-3">
+            <h3 class="h6 mb-1">Create and schedule classes</h3>
+            <div class="small text-body-secondary">Post new sessions with time, room, capacity, and pricing.</div>
+          </div>
+
+          <div class="p-3 border border-secondary-subtle rounded-3 mb-3">
+            <h3 class="h6 mb-1">View class roster</h3>
+            <div class="small text-body-secondary">See who’s attending and track waitlist status.</div>
+          </div>
+
+          <div class="p-3 border border-secondary-subtle rounded-3">
+            <h3 class="h6 mb-1">See feedback</h3>
+            <div class="small text-body-secondary">Review ratings and comments to improve future sessions.</div>
           </div>
         </div>
       </div>

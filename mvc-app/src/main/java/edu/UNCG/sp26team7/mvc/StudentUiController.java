@@ -94,13 +94,10 @@ public class StudentUiController {
   }
 
   @GetMapping("/browse")
-  public String browseClasses(HttpSession session, Model model) {
+  public String browseClasses(Model model, HttpSession session) {
     Long studentId = (Long) session.getAttribute("studentId");
 
-    if (studentId == null) {
-      return "redirect:/signin";
-    }
-
+    model.addAttribute("studentLoggedIn", studentId != null);
     model.addAttribute("templates", classTemplateService.getPublishedTemplates());
     return "student/browse";
   }
@@ -111,26 +108,30 @@ public class StudentUiController {
   }
 
   @PostMapping("/enroll")
-  public String enroll(@RequestParam Long classSessionId, HttpSession session) {
+  public String enroll(@RequestParam Long classSessionId, @RequestParam Long templateId, HttpSession session) {
     Long studentId = (Long) session.getAttribute("studentId");
 
     if (studentId == null) {
       return "redirect:/signin";
     }
 
-    StudentSchedule schedule = new StudentSchedule();
-    Student student = new Student();
-    student.setUserId(studentId);
-    ClassSession classSession = new ClassSession();
-    classSession.setClassSessionId(classSessionId);
+    try {
+      StudentSchedule schedule = new StudentSchedule();
+      Student student = new Student();
+      student.setUserId(studentId);
+      ClassSession classSession = new ClassSession();
+      classSession.setClassSessionId(classSessionId);
 
-    schedule.setStudent(student);
-    schedule.setClassSession(classSession);
-    schedule.setEnrolledAt(LocalDateTime.now());
-    schedule.setBookingStatus(BookingStatus.ENROLLED);
+      schedule.setStudent(student);
+      schedule.setClassSession(classSession);
+      schedule.setEnrolledAt(LocalDateTime.now());
+      schedule.setBookingStatus(BookingStatus.ENROLLED);
 
-    studentScheduleService.createStudentSchedule(schedule);
-    return "redirect:/student/browse?joined";
+      studentScheduleService.createStudentSchedule(schedule);
+      return "redirect:/student/classes/" + templateId + "?joined";
+    } catch (RuntimeException ex) {
+      return "redirect:/student/classes/" + templateId + "?enrollError";
+    }
   }
 
   @PostMapping("/cancel")
@@ -162,14 +163,11 @@ public class StudentUiController {
   public String classDetails(@PathVariable("id") Long templateId, Model model, HttpSession session) {
     Long studentId = (Long) session.getAttribute("studentId");
 
-    if (studentId == null) {
-      return "redirect:/signin";
-    }
-
     ClassTemplate template = classTemplateService.getClassTemplateById(templateId);
     List<Review> reviews = reviewService.getReviewsByClassTemplateId(templateId);
     List<ClassSession> sessions = classSessionService.getSessionsByClassTemplateId(templateId);
 
+    model.addAttribute("studentLoggedIn", studentId != null);
     model.addAttribute("template", template);
     model.addAttribute("reviews", reviews);
     model.addAttribute("sessions", sessions);

@@ -28,6 +28,11 @@ public class AppUiController {
     return "home";
   }
 
+  @GetMapping("/browse")
+  public String browse() {
+    return "redirect:/student/browse";
+  }
+
   @GetMapping("/signin")
   public String signin() {
     return "signin";
@@ -61,7 +66,7 @@ public class AppUiController {
       Instructor instructor = instructorService.authenticate(email, password);
       session.setAttribute("instructorId", instructor.getUserId());
       session.setAttribute("role", "INSTRUCTOR");
-      return "redirect:/instructor/my-classes.html";
+      return "redirect:/instructor/home.html";
     } catch (Exception ignored) {
     }
 
